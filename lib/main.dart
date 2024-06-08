@@ -4,6 +4,7 @@ import 'package:find_mosques/Features/mosques/presentation/views/find_mosque.dar
 import 'package:find_mosques/Features/splash/presentation/controllers/bloc/luanch_bloc.dart';
 import 'package:find_mosques/Features/splash/presentation/views/luanch_screen.dart';
 import 'package:find_mosques/core/constants/colors/colors.dart';
+import 'package:find_mosques/core/injection/dependecy_injection.dart';
 import 'package:find_mosques/core/routes/routes.dart';
 import 'package:find_mosques/l10n/l10n.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await DependencyInjection.init();
   runApp(const MyApp());
 }
 
