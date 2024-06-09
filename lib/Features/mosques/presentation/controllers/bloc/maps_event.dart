@@ -16,3 +16,20 @@ class InitializeMapsEvent extends MapsEvent {
   @override
   List<Object> get props => [controller];
 }
+
+class GetAllMosquesEventOnCameraMove extends MapsEvent {
+  final CameraPosition cameraPosition;
+  const GetAllMosquesEventOnCameraMove({
+    required this.cameraPosition,
+  });
+  @override
+  List<Object> get props => [cameraPosition];
+}
+
+class GetMosqueInfoEvent extends MapsEvent {
+  final String markerId;
+  final String mosqueName;
+  const GetMosqueInfoEvent({required this.markerId, required this.mosqueName});
+  @override
+  List<Object> get props => [markerId];
+}

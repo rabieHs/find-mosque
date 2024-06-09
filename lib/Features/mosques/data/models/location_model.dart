@@ -12,8 +12,8 @@ class LocationModel extends Location {
   factory LocationModel.fromMap(Map<String, dynamic> map) {
     return LocationModel(
       id: map['place_id'],
-      latitude: map['location']['lat'],
-      longitude: map['location']['lng'],
+      latitude: map['geometry']['location']['lat'],
+      longitude: map['geometry']['location']['lng'],
       name: map['name'],
     );
   }

@@ -10,10 +10,7 @@ import '../widgets/search_field_widget.dart';
 
 class FindMosque extends StatelessWidget {
   const FindMosque({super.key});
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +21,7 @@ class FindMosque extends StatelessWidget {
 
   Widget _buildBody(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.max,
       children: [
         _buildHeader(context),
         _buildMapContainer(context),
@@ -38,6 +36,7 @@ class FindMosque extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15),
       height: context.screenHeight() * 0.32,
       child: Column(
+        mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           PrayerTimeWidget(locale: locale),
@@ -49,7 +48,7 @@ class FindMosque extends StatelessWidget {
 
   Widget _buildMapContainer(BuildContext context) {
     return const Expanded(
-      child: MapsWidget(kGooglePlex: _kGooglePlex),
+      child: MapsWidget(),
     );
   }
 }

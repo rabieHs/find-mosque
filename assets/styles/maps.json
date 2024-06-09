@@ -157,7 +157,7 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#ffffff"
+        "color": "#ffffff" 
       }
     ]
   },
@@ -184,15 +184,16 @@
     "elementType": "geometry",
     "stylers": [
       {
-        "visibility": "on"
+        "color": "#d3d3d3" 
       }
     ]
   },
   {
     "featureType": "road.local",
+    "elementType": "geometry",
     "stylers": [
       {
-        "visibility": "off"
+        "color": "#d3d3d3" 
       }
     ]
   },
@@ -201,7 +202,7 @@
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "visibility": "on"
+        "color": "#d3d3d3" 
       }
     ]
   },

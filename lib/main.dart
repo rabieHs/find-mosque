@@ -27,8 +27,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-            create: (context) => LuanchBloc()..add(StartSplashEvent())),
-        BlocProvider(create: (context) => PagerBloc())
+            create: (context) => sl<LuanchBloc>()..add(StartSplashEvent())),
+        BlocProvider(create: (context) => sl<PagerBloc>())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate
         ],
-        home: FindMosque(),
+        home: const FindMosque(),
         routes: Routes.pagesRoutes,
       ),
     );

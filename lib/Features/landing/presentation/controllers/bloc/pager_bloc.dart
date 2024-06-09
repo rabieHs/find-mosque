@@ -7,7 +7,6 @@ part 'pager_state.dart';
 class PagerBloc extends Bloc<PagerEvent, PagerState> {
   PagerBloc() : super(PagerInitial()) {
     on<NavigateToPageEvent>((event, emit) {
-      print("event page ${event.page}");
       if (event.page == 3) {
         emit(NavigatePageState());
       } else {
