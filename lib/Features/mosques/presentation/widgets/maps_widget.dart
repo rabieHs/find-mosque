@@ -1,12 +1,20 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
-import 'package:find_mosques/Features/mosques/presentation/controllers/bloc/maps_bloc.dart';
-import 'package:find_mosques/core/extensions/screen_sizes.dart';
-import 'package:find_mosques/core/injection/dependecy_injection.dart';
+import 'package:find_mosques/Features/landing/presentation/widgets/circle_progress_button.dart';
+import 'package:find_mosques/Features/mosques/presentation/widgets/custom_info_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import 'package:find_mosques/Features/mosques/presentation/controllers/bloc/maps_bloc.dart';
+import 'package:find_mosques/core/constants/colors/colors.dart';
+import 'package:find_mosques/core/constants/styles/text_styles.dart';
+import 'package:find_mosques/core/extensions/screen_sizes.dart';
+import 'package:find_mosques/core/injection/dependecy_injection.dart';
+
+import '../views/mosque_info.dart';
 
 class MapsWidget extends StatelessWidget {
   const MapsWidget({
@@ -22,31 +30,8 @@ class MapsWidget extends StatelessWidget {
           if (state is ShowMosqueInfoState) {
             showModalBottomSheet(
                 context: context,
-                builder: (context) => Container(
-                      width: double.infinity,
-                      height: context.screenHeight() * 0.5,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            "assets/icons/marker_6.png",
-                            width: 150,
-                            height: 150,
-                            scale: 1,
-                          ),
-                          Text(
-                            state.mosqueName,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset("assets/icons/man.png"),
-                              Image.asset("assets/icons/women.png"),
-                            ],
-                          )
-                        ],
-                      ),
+                builder: (context) => MosqueInfo(
+                      location: state.location,
                     ));
           }
         },

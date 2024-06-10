@@ -11,14 +11,8 @@ import '../../Features/mosques/domain/entities/location.dart';
 
 class MapsMethos {
   Future<CameraPosition> getCurrentUserCameraPosition() async {
-    if (await Geolocator.checkPermission() == LocationPermission.denied) {
-      await Geolocator.requestPermission();
-    }
-    Position userPositon = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.bestForNavigation);
+    LatLng userPositionLatLang = await getCurrentUserPosition();
 
-    LatLng userPositionLatLang =
-        LatLng(userPositon.latitude, userPositon.longitude);
     return CameraPosition(target: userPositionLatLang, zoom: 15);
   }
 
@@ -49,7 +43,7 @@ class MapsMethos {
   }
 
   Set<Marker> getMarkers(List<Location> mosques, BitmapDescriptor icon,
-      void Function(String, String)? onTap) {
+      void Function(Location)? onTap) {
     return mosques
         .map((e) => Marker(
             icon: icon,
@@ -60,7 +54,7 @@ class MapsMethos {
                 onTap: () {
                   print("marker id: ${e.id}");
                 }),
-            onTap: () => onTap!(e.id, e.name)))
+            onTap: () => onTap!(e)))
         .toSet();
   }
 }

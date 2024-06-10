@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:find_mosques/Features/landing/presentation/controllers/bloc/pager_bloc.dart';
 import 'package:find_mosques/Features/mosques/data/datasources/remote/remote_datasource.dart';
 import 'package:find_mosques/Features/mosques/data/repository/mosques_repository_impl.dart';
@@ -23,13 +24,15 @@ class DependencyInjection {
     final InternetConnectionChecker checker = InternetConnectionChecker();
     final NetworkInfo info = NetworkInfoImpl(connectionChecker: checker);
     final Client client = Client();
+    final firestore = await FirebaseFirestore.instance;
 
     sl.registerLazySingleton<NetworkInfo>(() => info);
     sl.registerLazySingleton<Client>(() => client);
     sl.registerLazySingleton<MapsMethos>(() => MapsMethos());
 
-    sl.registerLazySingleton<MosquesRemoteDatasource>(
-        () => MosquesRemoteDatasourceImpl(client: client));
+    sl.registerLazySingleton<MosquesRemoteDatasource>(() =>
+        MosquesRemoteDatasourceImpl(
+            client: client, firebaseFireStore: firestore));
 
     sl.registerLazySingleton<MosquesRepository>(
         () => MosquesRepositoryImpl(networkInfo: sl(), remoteDatasource: sl()));

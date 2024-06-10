@@ -1,6 +1,7 @@
 import 'package:find_mosques/core/constants/colors/colors.dart';
 import 'package:find_mosques/core/extensions/screen_sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -47,7 +48,7 @@ class FindMosque extends StatelessWidget {
   }
 
   Widget _buildMapContainer(BuildContext context) {
-    return const Expanded(
+    return Expanded(
       child: MapsWidget(),
     );
   }

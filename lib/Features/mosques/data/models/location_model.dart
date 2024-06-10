@@ -20,4 +20,13 @@ class LocationModel extends Location {
 
   factory LocationModel.fromJson(String json) =>
       LocationModel.fromMap(jsonDecode(json));
+
+  factory LocationModel.fromEntity(Location location) {
+    return LocationModel(
+      id: location.id,
+      latitude: location.latitude,
+      longitude: location.longitude,
+      name: location.name,
+    );
+  }
 }

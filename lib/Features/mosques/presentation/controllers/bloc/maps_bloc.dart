@@ -32,15 +32,17 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
   Set<Marker> _markers = {};
   Set<Marker> get markers => _markers;
 
-  CameraPosition get currentPosition => CameraPosition(
-        target: LatLng(0, 0),
-        zoom: 15,
-      );
+  CameraPosition _currentPosition = CameraPosition(
+    target: LatLng(0, 0),
+    zoom: 15,
+  );
+  CameraPosition get currentPosition => _currentPosition;
 
   MapsBloc(
       this.getAllMusquesUsecase, this._mapCompleterController, this.mapsMethos)
       : super(MapsInitial()) {
     on<InitializeMapsEvent>((event, emit) async {
+      _currentPosition = await mapsMethos.getCurrentUserCameraPosition();
       _style = await MapsMethos().getJsonStyle("assets/styles/maps.json");
       _mapController = event.controller;
 
@@ -48,8 +50,8 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
 
       _mapController!.setMapStyle(_style);
 
-      _mapController!.moveCamera(CameraUpdate.newCameraPosition(
-          await MapsMethos().getCurrentUserCameraPosition()));
+      _mapController!
+          .moveCamera(CameraUpdate.newCameraPosition(_currentPosition));
     });
 
     on<GetAllMosquesEventOnCameraMove>((event, emit) async {
