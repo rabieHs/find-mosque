@@ -1,3 +1,4 @@
+import 'package:find_mosques/Features/mosques/data/models/location_model.dart';
 import 'package:find_mosques/Features/mosques/domain/entities/mosque.dart';
 
 class MosqueModel extends Mosque {
@@ -14,7 +15,7 @@ class MosqueModel extends Mosque {
   factory MosqueModel.fromMap(Map<String, dynamic> json) {
     return MosqueModel(
       name: json['name'],
-      location: json['location'],
+      location: LocationModel.fromMap(json['location']),
       isManAndWomen: json['isManAndWomen'],
       isFridayPrayer: json['isFridayPrayer'],
       isAvailable: json['isAvailable'],
@@ -36,7 +37,7 @@ class MosqueModel extends Mosque {
   Map<String, dynamic> toMap() {
     return {
       'name': name,
-      'location': location,
+      'location': LocationModel.fromEntity(location).toMap(),
       'isManAndWomen': isManAndWomen,
       'isFridayPrayer': isFridayPrayer,
       'isAvailable': isAvailable,

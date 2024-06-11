@@ -5,8 +5,11 @@ import 'package:find_mosques/Features/landing/presentation/controllers/bloc/page
 import 'package:find_mosques/Features/mosques/data/datasources/remote/remote_datasource.dart';
 import 'package:find_mosques/Features/mosques/data/repository/mosques_repository_impl.dart';
 import 'package:find_mosques/Features/mosques/domain/repository/mosques_repository.dart';
+import 'package:find_mosques/Features/mosques/domain/usecases/add_mosque_info_usecase.dart';
 import 'package:find_mosques/Features/mosques/domain/usecases/get_all_mousques_usecase.dart';
-import 'package:find_mosques/Features/mosques/presentation/controllers/bloc/maps_bloc.dart';
+import 'package:find_mosques/Features/mosques/domain/usecases/get_mosque_info_usecase.dart';
+import 'package:find_mosques/Features/mosques/presentation/controllers/maps_bloc/maps_bloc.dart';
+import 'package:find_mosques/Features/mosques/presentation/controllers/mosque_bloc/mosque_bloc.dart';
 import 'package:find_mosques/Features/splash/presentation/controllers/bloc/luanch_bloc.dart';
 import 'package:find_mosques/core/methods/maps_methods.dart';
 import 'package:find_mosques/core/networks/network_info.dart';
@@ -24,7 +27,7 @@ class DependencyInjection {
     final InternetConnectionChecker checker = InternetConnectionChecker();
     final NetworkInfo info = NetworkInfoImpl(connectionChecker: checker);
     final Client client = Client();
-    final firestore = await FirebaseFirestore.instance;
+    final firestore = FirebaseFirestore.instance;
 
     sl.registerLazySingleton<NetworkInfo>(() => info);
     sl.registerLazySingleton<Client>(() => client);
@@ -32,15 +35,21 @@ class DependencyInjection {
 
     sl.registerLazySingleton<MosquesRemoteDatasource>(() =>
         MosquesRemoteDatasourceImpl(
-            client: client, firebaseFireStore: firestore));
+            client: client, firebaseFireStore: FirebaseFirestore.instance));
 
     sl.registerLazySingleton<MosquesRepository>(
         () => MosquesRepositoryImpl(networkInfo: sl(), remoteDatasource: sl()));
 
     sl.registerLazySingleton<GetAllMusquesUsecase>(
         () => GetAllMusquesUsecase(repository: sl()));
+    sl.registerLazySingleton<GetMosqueInfoUsecase>(
+        () => GetMosqueInfoUsecase(repository: sl()));
+    sl.registerLazySingleton<AddMosqueInfoUsecase>(
+        () => AddMosqueInfoUsecase(repository: sl()));
 
     sl.registerFactory(() => MapsBloc(sl(), completer, sl()));
+    sl.registerFactory(() => MosqueBloc(sl(), sl()));
+
     sl.registerFactory(() => LuanchBloc());
     sl.registerFactory(() => PagerBloc());
   }

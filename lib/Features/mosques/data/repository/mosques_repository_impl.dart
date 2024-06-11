@@ -56,8 +56,8 @@ class MosquesRepositoryImpl implements MosquesRepository {
   Future<Either<Failure, Unit>> addMosqueInfo(Mosque mosque) async {
     if (await networkInfo.isConnected) {
       try {
-        final response = await remoteDatasource
-            .addMosqueInfo(MosqueModel.fromEntity(mosque));
+        final mosqueModel = MosqueModel.fromEntity(mosque);
+        final response = await remoteDatasource.addMosqueInfo(mosqueModel);
         return Right(response);
       } on ServerException catch (e) {
         print(e);

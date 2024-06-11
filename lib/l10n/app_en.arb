@@ -4,7 +4,7 @@
     "helloWorld":"hello World!",
     "nearestMosque": "Reach the nearest mosque",
     "easyToUse": "You can use the app easily and find your way",
-    "ladiesPrayerArea": "Location of ladies' prayer area",
+    "knowLadiesPrayerArea": "Location of ladies' prayer area",
     "dontMissCongregationalPrayer": "Don't miss the congregational prayer",
     "catchFridayPrayer": "Catch the Friday prayer",
     "nextPrayerTime": "Next prayer time",
@@ -29,6 +29,27 @@
     "shareApp": "Share the app",
     "contactUs": "Contact us",
     "aboutApp": "About the app",
-    "loginLogout": "Login / Logout"
+    "loginLogout": "Login / Logout",
+    "estimatedTime": "Estimated time",
+    "distance": "Distance",
+    "availableForPrayer": "Available for prayer",
+    "fridayPrayer": "Friday prayer",
+    "lessonCircles": "Lesson circles",
+    "none": "None",
+    "mosqueStatus": "Mosque status",
+    "open": "Open",
+    "noInformationAvailable": "No information available",
+    "addInformation": "Add information",
+    "add": "Add",
+    "ladiesPrayerArea": "Location of ladies' prayer area",
+    "thereIs": "There is",
+    "loadingPleaseWait": "Loading, please wait",
+    "mosqueAddedSuccessfully": "Mosque added successfully",
+    "errorAddingMosque": "Error adding mosque",
+    "youAreOffline": "You are offline"
+
+
+
+
    
 }

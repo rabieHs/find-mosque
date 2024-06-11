@@ -29,4 +29,17 @@ class LocationModel extends Location {
       name: location.name,
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'place_id': id,
+      'geometry': {
+        'location': {
+          'lat': latitude,
+          'lng': longitude,
+        }
+      },
+      'name': name,
+    };
+  }
 }

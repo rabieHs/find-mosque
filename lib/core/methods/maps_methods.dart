@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:find_mosques/Features/mosques/presentation/controllers/bloc/maps_bloc.dart';
+import 'package:find_mosques/Features/mosques/presentation/controllers/maps_bloc/maps_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

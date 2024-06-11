@@ -1,12 +1,15 @@
 import 'package:find_mosques/Features/landing/presentation/controllers/bloc/pager_bloc.dart';
 import 'package:find_mosques/Features/landing/presentation/views/landing_screen.dart';
+import 'package:find_mosques/Features/mosques/presentation/controllers/mosque_bloc/mosque_bloc.dart';
 import 'package:find_mosques/Features/mosques/presentation/views/find_mosque.dart';
 import 'package:find_mosques/Features/splash/presentation/controllers/bloc/luanch_bloc.dart';
 import 'package:find_mosques/Features/splash/presentation/views/luanch_screen.dart';
 import 'package:find_mosques/core/constants/colors/colors.dart';
 import 'package:find_mosques/core/injection/dependecy_injection.dart';
 import 'package:find_mosques/core/routes/routes.dart';
+import 'package:find_mosques/firebase_options.dart';
 import 'package:find_mosques/l10n/l10n.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -14,6 +17,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await DependencyInjection.init();
   runApp(const MyApp());
 }
@@ -28,7 +32,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (context) => sl<LuanchBloc>()..add(StartSplashEvent())),
-        BlocProvider(create: (context) => sl<PagerBloc>())
+        BlocProvider(create: (context) => sl<PagerBloc>()),
+        BlocProvider(create: (context) => sl<MosqueBloc>()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

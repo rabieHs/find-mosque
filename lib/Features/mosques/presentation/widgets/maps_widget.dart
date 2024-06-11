@@ -8,12 +8,13 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import 'package:find_mosques/Features/mosques/presentation/controllers/bloc/maps_bloc.dart';
+import 'package:find_mosques/Features/mosques/presentation/controllers/maps_bloc/maps_bloc.dart';
 import 'package:find_mosques/core/constants/colors/colors.dart';
 import 'package:find_mosques/core/constants/styles/text_styles.dart';
 import 'package:find_mosques/core/extensions/screen_sizes.dart';
 import 'package:find_mosques/core/injection/dependecy_injection.dart';
 
+import '../controllers/mosque_bloc/mosque_bloc.dart';
 import '../views/mosque_info.dart';
 
 class MapsWidget extends StatelessWidget {
@@ -27,7 +28,10 @@ class MapsWidget extends StatelessWidget {
       create: (context) => sl<MapsBloc>(),
       child: BlocConsumer<MapsBloc, MapsState>(
         listener: (context, state) {
-          if (state is ShowMosqueInfoState) {
+          if (state is ShowMosqueLocationState) {
+            print("showing dialog");
+            BlocProvider.of<MosqueBloc>(context)
+                .add(GetMosqueInfoEvent(location: state.location));
             showModalBottomSheet(
                 context: context,
                 builder: (context) => MosqueInfo(

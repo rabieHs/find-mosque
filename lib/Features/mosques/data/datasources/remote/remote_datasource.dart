@@ -39,12 +39,12 @@ class MosquesRemoteDatasourceImpl implements MosquesRemoteDatasource {
   }
 
   @override
-  Future<Unit> addMosqueInfo(MosqueModel mosque) {
+  Future<Unit> addMosqueInfo(MosqueModel mosque) async {
     try {
-      final mosqueRef = firebaseFireStore
+      await firebaseFireStore
           .collection(MOSQUES_COLLECTION)
-          .doc(mosque.location.id);
-      mosqueRef.set(mosque.toMap());
+          .doc(mosque.location.id)
+          .set(mosque.toMap());
       return Future(() => unit);
     } on FirebaseException catch (e) {
       print(e);

@@ -26,9 +26,11 @@ class GetAllMosquesEventOnCameraMove extends MapsEvent {
   List<Object> get props => [cameraPosition];
 }
 
-class GetMosqueInfoEvent extends MapsEvent {
+class ShowMosqueLocationEvent extends MapsEvent {
   final Location location;
-  const GetMosqueInfoEvent({required this.location});
+  const ShowMosqueLocationEvent({
+    required this.location,
+  });
   @override
   List<Object> get props => [location];
 }

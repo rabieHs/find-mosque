@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:find_mosques/Features/mosques/data/models/location_model.dart';
 import 'package:find_mosques/Features/mosques/domain/entities/location.dart';
 import 'package:find_mosques/Features/mosques/domain/usecases/get_all_mousques_usecase.dart';
 import 'package:find_mosques/core/common/get_mosques_parameters.dart';
@@ -32,7 +33,7 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
   Set<Marker> _markers = {};
   Set<Marker> get markers => _markers;
 
-  CameraPosition _currentPosition = CameraPosition(
+  CameraPosition _currentPosition = const CameraPosition(
     target: LatLng(0, 0),
     zoom: 15,
   );
@@ -68,8 +69,7 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
           _markers = mapsMethos.getMarkers(
             mosques,
             icon,
-            (id, name) =>
-                add(GetMosqueInfoEvent(markerId: id, mosqueName: name)),
+            (location) => add(ShowMosqueLocationEvent(location: location)),
           );
           emit(MosquesLoadedState(
             mosques: mosques,
@@ -78,9 +78,9 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
       );
     });
 
-    on<GetMosqueInfoEvent>((event, emit) async {
+    on<ShowMosqueLocationEvent>((event, emit) async {
       emit(const LoadingMosqueInfoState());
-      emit(ShowMosqueInfoState(event.mosqueName));
+      emit(ShowMosqueLocationState(event.location));
     });
   }
 }

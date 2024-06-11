@@ -45,9 +45,9 @@ class LoadingMosqueInfoState extends MapsState {
   List<Object> get props => [];
 }
 
-class ShowMosqueInfoState extends MapsState {
+class ShowMosqueLocationState extends MapsState {
   final Location location;
-  const ShowMosqueInfoState(
+  const ShowMosqueLocationState(
     this.location,
   );
   @override

@@ -3,7 +3,7 @@
     "helloWorld":"مرحبا",
     "nearestMosque": "الوصول لاقرب مسجد",
     "easyToUse": "تقدر تستخدم التطبيق بكل سهولة و تعرف توصل",
-    "ladiesPrayerArea": "معرف مكان لمصلي السيدات",
+    "knowLadiesPrayerArea": "معرف مكان لمصلي السيدات",
     "dontMissCongregationalPrayer": "لا تفوتك صلاة الجماعة",
     "catchFridayPrayer": "اللحاق بصلاة الجمعة",
     "nextPrayerTime": "موعد الصلاة القادمة",
@@ -28,5 +28,26 @@
     "shareApp": "شارك التطبيق",
     "contactUs": "تواصل معانا",
     "aboutApp": "عن التطبيق",
-    "loginLogout": "تسجيل الدخول / الخروج"
+    "loginLogout": "تسجيل الدخول / الخروج",
+    "estimatedTime": "الوقت المتوقع",
+    "distance": "المسافة",
+    "availableForPrayer": "متاح للصلاة",
+    "fridayPrayer": "صلاة الجمعة",
+    "lessonCircles": "حلقات دروس",
+    "none": "لا يوجد",
+    "mosqueStatus": "حالة المسجد",
+    "open": "مفتوح",
+    "noInformationAvailable": "لا يوجد معلومات",
+    "addInformation": "قم  بإضافة معلومات",
+    "add": "إضافة",
+    "ladiesPrayerArea": "مكان لمصلي السيدات",
+    "thereIs": "يوجد",
+    "loadingPleaseWait": "جاري التحميل، يرجى الانتظار",
+    "mosqueAddedSuccessfully": "تم إضافة المسجد بنجاح",
+    "errorAddingMosque": "خطأ في إضافة المسجد",
+    "youAreOffline": "أنت غير متصل بالإنترنت"
+
+
+
+
 }

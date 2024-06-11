@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "368671850669",
+    "project_id": "find-mosques-c99bc",
+    "storage_bucket": "find-mosques-c99bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368671850669:android:825ecc6602868ce7ba4624",
+        "android_client_info": {
+          "package_name": "com.example.find_mosques"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoXr_Mmm6TMwAcNGqLTmp8vA7xk_jy_xM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
