@@ -41,7 +41,7 @@ class MosqueBloc extends Bloc<MosqueEvent, MosqueState> {
 
       final response = await getMosqueInfoUsecase(event.location);
       response.fold(
-        (l) => emit(ErrorAddMosqueState(message: mapFailureToMessage(l))),
+        (l) => emit(ErrorGetMosqueState(message: mapFailureToMessage(l))),
         (r) => emit(SuccessGetMosqueState(mosque: r)),
       );
     });

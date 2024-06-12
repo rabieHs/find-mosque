@@ -53,3 +53,18 @@ class ShowMosqueLocationState extends MapsState {
   @override
   List<Object> get props => [location];
 }
+
+class LoadingGetRouteInfoState extends MapsState {}
+
+class SuccessGetRouteInfoState extends MapsState {
+  double distance;
+  double estimatedTime;
+  String street;
+  SuccessGetRouteInfoState({
+    required this.street,
+    required this.distance,
+    required this.estimatedTime,
+  });
+  @override
+  List<Object> get props => [distance, estimatedTime];
+}

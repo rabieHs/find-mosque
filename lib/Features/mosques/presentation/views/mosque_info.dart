@@ -3,15 +3,10 @@ import 'package:find_mosques/Features/mosques/domain/entities/mosque.dart';
 import 'package:find_mosques/Features/mosques/presentation/controllers/mosque_bloc/mosque_bloc.dart';
 import 'package:find_mosques/Features/mosques/presentation/views/add_mosque_info.dart';
 import 'package:flutter/material.dart';
-
 import 'package:find_mosques/Features/mosques/domain/entities/location.dart';
 import 'package:find_mosques/core/extensions/screen_sizes.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/constants/styles/text_styles.dart';
-import '../../../landing/presentation/widgets/circle_progress_button.dart';
-import '../widgets/custom_info_widget.dart';
 import '../widgets/mosque_info_widget.dart';
 
 class MosqueInfo extends StatelessWidget {
@@ -25,10 +20,12 @@ class MosqueInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MosqueBloc, MosqueState>(
       builder: (context, state) {
+        print(state.runtimeType);
+
         return SizedBox(
           width: double.infinity,
           height: context.screenHeight() * 0.6,
-          child: state is SuccessGetMosqueState
+          child: (state is SuccessGetMosqueState)
               ? _buildMosqueInfoContainer(state.mosque)
               : _buildAddMosqueInfoContainer(context),
         );

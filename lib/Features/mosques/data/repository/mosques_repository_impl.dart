@@ -27,7 +27,6 @@ class MosquesRepositoryImpl implements MosquesRepository {
         final response = await remoteDatasource.getAllMosques(lat, long);
         return Right(response);
       } on ServerException catch (e) {
-        print(e);
         return Left(ServerFailure());
       }
     } else {

@@ -25,6 +25,13 @@ final class ErrorAddMosqueState extends MosqueState {
   List<Object> get props => [message];
 }
 
+final class ErrorGetMosqueState extends MosqueState {
+  final String message;
+  const ErrorGetMosqueState({required this.message});
+  @override
+  List<Object> get props => [message];
+}
+
 class LoadingAddMosqueState extends MosqueState {
   const LoadingAddMosqueState();
   @override

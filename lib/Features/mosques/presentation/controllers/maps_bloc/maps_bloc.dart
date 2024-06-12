@@ -1,16 +1,11 @@
 import 'dart:async';
-
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:find_mosques/Features/mosques/data/models/location_model.dart';
 import 'package:find_mosques/Features/mosques/domain/entities/location.dart';
 import 'package:find_mosques/Features/mosques/domain/usecases/get_all_mousques_usecase.dart';
 import 'package:find_mosques/core/common/get_mosques_parameters.dart';
-import 'package:find_mosques/core/error/failure.dart';
 import 'package:find_mosques/core/methods/error_handler.dart';
 import 'package:find_mosques/core/methods/maps_methods.dart';
-import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 part 'maps_event.dart';
@@ -81,6 +76,16 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
     on<ShowMosqueLocationEvent>((event, emit) async {
       emit(const LoadingMosqueInfoState());
       emit(ShowMosqueLocationState(event.location));
+    });
+
+    on<GetRouteInfoEvent>((event, emit) async {
+      emit(LoadingGetRouteInfoState());
+      final roadName = await mapsMethos.getRoadName(event.lat, event.long);
+      final distance =
+          await mapsMethos.calculateDistance(event.lat, event.long);
+      double estimatedTime = mapsMethos.calculateEstimatedTime(distance);
+      emit(SuccessGetRouteInfoState(
+          street: roadName, distance: distance, estimatedTime: estimatedTime));
     });
   }
 }

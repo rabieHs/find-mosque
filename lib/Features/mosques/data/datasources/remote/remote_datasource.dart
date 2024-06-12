@@ -57,9 +57,13 @@ class MosquesRemoteDatasourceImpl implements MosquesRemoteDatasource {
     try {
       final mosqueRef =
           firebaseFireStore.collection(MOSQUES_COLLECTION).doc(location.id);
-      return await mosqueRef
-          .get()
-          .then((value) => MosqueModel.fromMap(value.data()!));
+      final response = await mosqueRef.get();
+
+      if (response.data() != null) {
+        return MosqueModel.fromMap(response.data()!);
+      } else {
+        throw ServerException();
+      }
     } on FirebaseException catch (e) {
       print(e);
       throw ServerException();

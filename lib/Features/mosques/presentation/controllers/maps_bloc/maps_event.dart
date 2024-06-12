@@ -34,3 +34,14 @@ class ShowMosqueLocationEvent extends MapsEvent {
   @override
   List<Object> get props => [location];
 }
+
+class GetRouteInfoEvent extends MapsEvent {
+  final double lat;
+  final double long;
+  const GetRouteInfoEvent({
+    required this.lat,
+    required this.long,
+  });
+  @override
+  List<Object> get props => [lat, long];
+}
