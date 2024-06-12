@@ -68,3 +68,5 @@ class SuccessGetRouteInfoState extends MapsState {
   @override
   List<Object> get props => [distance, estimatedTime];
 }
+
+class SuccessNavigateState extends MapsState {}

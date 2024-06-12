@@ -2,6 +2,7 @@
 import 'package:find_mosques/Features/mosques/domain/entities/mosque.dart';
 import 'package:find_mosques/Features/mosques/presentation/controllers/mosque_bloc/mosque_bloc.dart';
 import 'package:find_mosques/Features/mosques/presentation/views/add_mosque_info.dart';
+import 'package:find_mosques/core/methods/messages.dart';
 import 'package:flutter/material.dart';
 import 'package:find_mosques/Features/mosques/domain/entities/location.dart';
 import 'package:find_mosques/core/extensions/screen_sizes.dart';
@@ -18,14 +19,19 @@ class MosqueInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MosqueBloc, MosqueState>(
+    return BlocConsumer<MosqueBloc, MosqueState>(
+      listener: (context, state) {
+        if (state is ErrorGetMosqueState) {
+          showErrorMessage(context, state.message);
+        }
+      },
       builder: (context, state) {
         print(state.runtimeType);
 
         return SizedBox(
           width: double.infinity,
           height: context.screenHeight() * 0.6,
-          child: (state is SuccessGetMosqueState)
+          child: state is SuccessGetMosqueState
               ? _buildMosqueInfoContainer(state.mosque)
               : _buildAddMosqueInfoContainer(context),
         );

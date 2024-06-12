@@ -45,3 +45,14 @@ class GetRouteInfoEvent extends MapsEvent {
   @override
   List<Object> get props => [lat, long];
 }
+
+class startNavigationEvent extends MapsEvent {
+  final double lat;
+  final double long;
+  const startNavigationEvent({
+    required this.lat,
+    required this.long,
+  });
+  @override
+  List<Object> get props => [lat, long];
+}

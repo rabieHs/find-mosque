@@ -1,5 +1,6 @@
 import 'package:find_mosques/Features/landing/presentation/controllers/bloc/pager_bloc.dart';
 import 'package:find_mosques/Features/landing/presentation/views/landing_screen.dart';
+import 'package:find_mosques/Features/mosques/presentation/controllers/maps_bloc/maps_bloc.dart';
 import 'package:find_mosques/Features/mosques/presentation/controllers/mosque_bloc/mosque_bloc.dart';
 import 'package:find_mosques/Features/mosques/presentation/views/find_mosque.dart';
 import 'package:find_mosques/Features/splash/presentation/controllers/bloc/luanch_bloc.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => sl<MapsBloc>()),
         BlocProvider(
             create: (context) => sl<LuanchBloc>()..add(StartSplashEvent())),
         BlocProvider(create: (context) => sl<PagerBloc>()),

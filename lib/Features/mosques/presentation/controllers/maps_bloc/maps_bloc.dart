@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:find_mosques/Features/mosques/domain/entities/location.dart';
 import 'package:find_mosques/Features/mosques/domain/usecases/get_all_mousques_usecase.dart';
 import 'package:find_mosques/core/common/get_mosques_parameters.dart';
+import 'package:find_mosques/core/constants/colors/colors.dart';
 import 'package:find_mosques/core/methods/error_handler.dart';
 import 'package:find_mosques/core/methods/maps_methods.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +18,8 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
 
   String _style = "";
   String get style => _style;
+  Set<Polyline> _polylineCoordinates = {};
+  Set<Polyline> get polylineCoordinates => _polylineCoordinates;
 
   Completer<GoogleMapController> _mapCompleterController;
   Completer<GoogleMapController> get mapCompleterController =>
@@ -86,6 +89,30 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
       double estimatedTime = mapsMethos.calculateEstimatedTime(distance);
       emit(SuccessGetRouteInfoState(
           street: roadName, distance: distance, estimatedTime: estimatedTime));
+    });
+
+    on<startNavigationEvent>((event, emit) async {
+      print("startNavigationEvent");
+      _currentPosition = await mapsMethos.getCurrentUserCameraPosition();
+      print("currentPosition: $_currentPosition");
+      final pints = await mapsMethos.showRouteBetweenUserAndMosque(
+          LatLng(
+            _currentPosition.target.latitude,
+            _currentPosition.target.longitude,
+          ),
+          LatLng(event.lat, event.long));
+
+      _polylineCoordinates = {
+        Polyline(
+          polylineId: const PolylineId("route"),
+          color: secondaryColor,
+          width: 5,
+          points: pints,
+        ),
+      };
+      emit(SuccessNavigateState());
+
+      print("polylineCoordinates: $_polylineCoordinates");
     });
   }
 }

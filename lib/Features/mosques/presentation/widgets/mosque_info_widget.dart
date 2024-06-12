@@ -37,8 +37,16 @@ class MosqueInfoWidget extends StatelessWidget {
         _buildRoute(context, locale),
         const Divider(),
         _buildInfos(locale),
-        const CircleProgressButton(
-          pageProgress: 100,
+        GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+            BlocProvider.of<MapsBloc>(context).add(startNavigationEvent(
+                lat: mosque.location.latitude,
+                long: mosque.location.longitude));
+          },
+          child: const CircleProgressButton(
+            pageProgress: 100,
+          ),
         )
       ],
     );
