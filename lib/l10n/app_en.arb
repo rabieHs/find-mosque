@@ -46,7 +46,12 @@
     "loadingPleaseWait": "Loading, please wait",
     "mosqueAddedSuccessfully": "Mosque added successfully",
     "errorAddingMosque": "Error adding mosque",
-    "youAreOffline": "You are offline"
+    "youAreOffline": "You are offline",
+    "errorOccurredCheckInternet": "An error occurred, please check your internet connection",
+    "errorOccurred": "An error occurred",
+    "checkInternetConnection": "Please check your internet connection",
+    "retry": "Retry"
+
 
 
 

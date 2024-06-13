@@ -6,8 +6,10 @@ import 'package:find_mosques/core/common/get_mosques_parameters.dart';
 import 'package:find_mosques/core/constants/colors/colors.dart';
 import 'package:find_mosques/core/methods/error_handler.dart';
 import 'package:find_mosques/core/methods/maps_methods.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 part 'maps_event.dart';
 part 'maps_state.dart';
@@ -44,11 +46,8 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
       _currentPosition = await mapsMethos.getCurrentUserCameraPosition();
       _style = await MapsMethos().getJsonStyle("assets/styles/maps.json");
       _mapController = event.controller;
-
       _mapCompleterController.complete(_mapController);
-
       _mapController!.setMapStyle(_style);
-
       _mapController!
           .moveCamera(CameraUpdate.newCameraPosition(_currentPosition));
     });
@@ -61,8 +60,11 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
           longitude: event.cameraPosition.target.longitude);
       final result = await getAllMusquesUsecase(parameters);
       result.fold(
-        (failure) =>
-            emit(MosquesErrorState(message: mapFailureToMessage(failure))),
+        (failure) {
+          emit(MosquesLocationErrorState(
+              message: mapFailureToMessage(
+                  failure, AppLocalizations.of(event.context)!)));
+        },
         (mosques) async {
           _markers = mapsMethos.getMarkers(
             mosques,
@@ -92,16 +94,14 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
     });
 
     on<startNavigationEvent>((event, emit) async {
-      print("startNavigationEvent");
       _currentPosition = await mapsMethos.getCurrentUserCameraPosition();
-      print("currentPosition: $_currentPosition");
+
       final pints = await mapsMethos.showRouteBetweenUserAndMosque(
           LatLng(
             _currentPosition.target.latitude,
             _currentPosition.target.longitude,
           ),
           LatLng(event.lat, event.long));
-
       _polylineCoordinates = {
         Polyline(
           polylineId: const PolylineId("route"),
@@ -111,8 +111,8 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
         ),
       };
       emit(SuccessNavigateState());
-
-      print("polylineCoordinates: $_polylineCoordinates");
+      _mapController!
+          .animateCamera(CameraUpdate.newCameraPosition(_currentPosition));
     });
   }
 }

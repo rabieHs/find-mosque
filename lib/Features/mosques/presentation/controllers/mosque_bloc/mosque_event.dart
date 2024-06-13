@@ -9,13 +9,15 @@ abstract class MosqueEvent extends Equatable {
 }
 
 class AddMosqueInfoEvent extends MosqueEvent {
+  BuildContext context;
   final String name;
   final Location location;
   final bool isManAndWomen;
   final bool isFridayPrayer;
   final bool isAvailable;
   final bool isTeaching;
-  const AddMosqueInfoEvent(
+  AddMosqueInfoEvent(
+    this.context,
     this.name,
     this.location,
     this.isManAndWomen,
@@ -28,8 +30,13 @@ class AddMosqueInfoEvent extends MosqueEvent {
 }
 
 class GetMosqueInfoEvent extends MosqueEvent {
+  BuildContext context;
+
   final Location location;
-  const GetMosqueInfoEvent({required this.location});
+  GetMosqueInfoEvent({
+    required this.context,
+    required this.location,
+  });
   @override
   List<Object> get props => [location];
 }

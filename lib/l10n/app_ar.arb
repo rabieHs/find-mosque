@@ -45,7 +45,12 @@
     "loadingPleaseWait": "جاري التحميل، يرجى الانتظار",
     "mosqueAddedSuccessfully": "تم إضافة المسجد بنجاح",
     "errorAddingMosque": "خطأ في إضافة المسجد",
-    "youAreOffline": "أنت غير متصل بالإنترنت"
+    "youAreOffline": "أنت غير متصل بالإنترنت",
+    "errorOccurredCheckInternet": "حدث خطأ، يرجى التحقق من اتصالك بالإنترنت",
+    "errorOccurred": "حدث خطأ",
+    "checkInternetConnection": "يرجى التحقق من اتصالك بالإنترنت",
+    "retry": "أعد المحاولة"
+
 
 
 

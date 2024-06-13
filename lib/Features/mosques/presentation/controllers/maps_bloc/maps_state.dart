@@ -23,9 +23,9 @@ class InitializedCameraState extends MapsState {
 
 class MosquesLoadingState extends MapsState {}
 
-class MosquesErrorState extends MapsState {
+class MosquesLocationErrorState extends MapsState {
   final String message;
-  const MosquesErrorState({required this.message});
+  const MosquesLocationErrorState({required this.message});
   @override
   List<Object> get props => [message];
 }

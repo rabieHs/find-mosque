@@ -42,7 +42,10 @@ class MosquesRepositoryImpl implements MosquesRepository {
         final response = await remoteDatasource
             .getMosqueInfo(LocationModel.fromEntity(location));
         return Right(response);
+      } on EmptyException {
+        return Left(EmptyFailure());
       } on ServerException catch (e) {
+        print("repository server exception:");
         print(e);
         return Left(ServerFailure());
       }

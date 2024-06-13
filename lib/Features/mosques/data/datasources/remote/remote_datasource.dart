@@ -54,18 +54,17 @@ class MosquesRemoteDatasourceImpl implements MosquesRemoteDatasource {
 
   @override
   Future<MosqueModel> getMosqueInfo(LocationModel location) async {
-    try {
-      final mosqueRef =
-          firebaseFireStore.collection(MOSQUES_COLLECTION).doc(location.id);
-      final response = await mosqueRef.get();
+    final mosqueRef =
+        firebaseFireStore.collection(MOSQUES_COLLECTION).doc(location.id);
+    final response = await mosqueRef.get();
 
-      if (response.data() != null) {
-        return MosqueModel.fromMap(response.data()!);
-      } else {
-        throw ServerException();
-      }
-    } on FirebaseException catch (e) {
-      print(e);
+    if (response.exists && response.data() != null) {
+      print("data: ${response.data()}");
+      return MosqueModel.fromMap(response.data()!);
+    } else if (!response.exists) {
+      throw EmptyException();
+    } else {
+      print("remote server failure");
       throw ServerException();
     }
   }

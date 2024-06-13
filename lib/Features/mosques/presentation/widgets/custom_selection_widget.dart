@@ -32,7 +32,7 @@ class CustomSelectionWidget extends StatelessWidget {
             valueListenable: selectedOptionNotifier,
             builder: (context, value, child) {
               return SizedBox(
-                width: context.screenWidht() * 0.7,
+                width: context.screenWidht() * 0.8,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[

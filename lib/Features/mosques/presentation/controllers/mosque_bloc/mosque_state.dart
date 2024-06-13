@@ -11,6 +11,10 @@ final class MosqueInitial extends MosqueState {}
 
 final class SuccessAddMosqueState extends MosqueState {}
 
+final class MosqueDataEmtyState extends MosqueState {}
+
+final class LoadingGetMosqueInfoState extends MosqueState {}
+
 final class SuccessGetMosqueState extends MosqueState {
   final Mosque mosque;
   const SuccessGetMosqueState({required this.mosque});

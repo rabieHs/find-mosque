@@ -85,6 +85,7 @@ class AddMosqueInfo extends StatelessWidget {
                       onPressed: () {
                         BlocProvider.of<MosqueBloc>(context).add(
                             AddMosqueInfoEvent(
+                                context,
                                 nameController.text,
                                 location,
                                 ladiesPrayer.value!,

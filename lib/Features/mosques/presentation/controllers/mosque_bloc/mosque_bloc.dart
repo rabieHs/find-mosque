@@ -2,10 +2,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:find_mosques/Features/mosques/domain/entities/mosque.dart';
-
 import 'package:find_mosques/Features/mosques/domain/usecases/add_mosque_info_usecase.dart';
 import 'package:find_mosques/Features/mosques/domain/usecases/get_mosque_info_usecase.dart';
 import 'package:find_mosques/core/methods/error_handler.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../domain/entities/location.dart';
 
@@ -32,16 +33,21 @@ class MosqueBloc extends Bloc<MosqueEvent, MosqueState> {
       );
       final response = await addMosqueInfoUsecase(mosque);
       response.fold(
-        (l) => emit(ErrorAddMosqueState(message: mapFailureToMessage(l))),
+        (l) => emit(ErrorAddMosqueState(
+            message:
+                mapFailureToMessage(l, AppLocalizations.of(event.context)!))),
         (r) => emit(SuccessAddMosqueState()),
       );
     });
     on<GetMosqueInfoEvent>((event, emit) async {
-      emit(LoadingAddMosqueState());
+      emit(LoadingGetMosqueInfoState());
 
       final response = await getMosqueInfoUsecase(event.location);
       response.fold(
-        (l) => emit(ErrorGetMosqueState(message: mapFailureToMessage(l))),
+        (l) {
+          print("bloc runtimeType: ${l.runtimeType}");
+          emit(handeMosqueState(l, AppLocalizations.of(event.context)!));
+        },
         (r) => emit(SuccessGetMosqueState(mosque: r)),
       );
     });

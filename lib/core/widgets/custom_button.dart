@@ -1,3 +1,4 @@
+import 'package:find_mosques/core/constants/styles/shapes.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/colors/colors.dart';
@@ -18,7 +19,7 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: secondaryColor,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        shape: customRoundedShape(15),
       ),
       child: SizedBox(
         width: 100,
