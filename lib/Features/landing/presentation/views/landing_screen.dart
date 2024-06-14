@@ -6,7 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:find_mosques/Features/landing/presentation/controllers/bloc/pager_bloc.dart';
 import 'package:find_mosques/core/extensions/screen_sizes.dart';
 
-import '../widgets/circle_progress_button.dart';
+import '../../../../core/widgets/circle_progress_button.dart';
 import '../widgets/page_view_widget.dart';
 
 class LandingScreen extends StatelessWidget {

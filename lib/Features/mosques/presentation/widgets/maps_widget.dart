@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:find_mosques/core/methods/messages.dart';
+import 'package:find_mosques/core/widgets/circle_progress_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,31 +38,54 @@ class MapsWidget extends StatelessWidget {
       builder: (context, state) {
         final bloc = BlocProvider.of<MapsBloc>(context);
 
-        return Container(
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-          child: GoogleMap(
-            onCameraMove: (position) {
-              if (state is! SuccessNavigateState) {
-                bloc.add(GetAllMosquesEventOnCameraMove(
-                  context: context,
-                  cameraPosition: position,
-                ));
-              }
-            },
-            myLocationButtonEnabled: true,
-            myLocationEnabled: true,
-            polylines:
-                state is SuccessNavigateState ? bloc.polylineCoordinates : {},
-            initialCameraPosition: bloc.currentPosition,
-            markers: BlocProvider.of<MapsBloc>(context).markers,
-            onMapCreated: (controller) {
-              bloc.add(InitializeMapsEvent(controller: controller));
-            },
-          ),
+        return Stack(
+          // fit: StackFit.expand,
+          children: [
+            Container(
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20))),
+              child: GoogleMap(
+                onCameraMove: (position) {
+                  if (state is! SuccessNavigateState) {
+                    bloc.add(GetAllMosquesEventOnCameraMove(
+                      context: context,
+                      cameraPosition: position,
+                    ));
+                  }
+                },
+                myLocationButtonEnabled: true,
+                myLocationEnabled: true,
+                polylines: state is SuccessNavigateState
+                    ? bloc.polylineCoordinates
+                    : {},
+                initialCameraPosition: bloc.currentPosition,
+                markers: BlocProvider.of<MapsBloc>(context).markers,
+                onMapCreated: (controller) {
+                  bloc.add(InitializeMapsEvent(controller: controller));
+                },
+              ),
+            ),
+            state is SuccessNavigateState
+                ? Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.all(30.0),
+                      child: CircleProgressButton(
+                        onTap: () {
+                          BlocProvider.of<MapsBloc>(context)
+                              .add(CancelNavigationEvent());
+                        },
+                        forgroundColor: Colors.red,
+                        backgroundColor: Colors.red,
+                        icon: Icons.close,
+                      ),
+                    ))
+                : SizedBox.shrink()
+          ],
         );
       },
     );

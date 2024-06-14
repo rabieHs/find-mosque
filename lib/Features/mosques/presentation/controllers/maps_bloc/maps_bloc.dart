@@ -93,7 +93,7 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
           street: roadName, distance: distance, estimatedTime: estimatedTime));
     });
 
-    on<startNavigationEvent>((event, emit) async {
+    on<StartNavigationEvent>((event, emit) async {
       _currentPosition = await mapsMethos.getCurrentUserCameraPosition();
 
       final pints = await mapsMethos.showRouteBetweenUserAndMosque(
@@ -113,6 +113,10 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
       emit(SuccessNavigateState());
       _mapController!
           .animateCamera(CameraUpdate.newCameraPosition(_currentPosition));
+    });
+    on<CancelNavigationEvent>((event, emit) async {
+      _polylineCoordinates = {};
+      emit(CancelNavigateState());
     });
   }
 }

@@ -70,3 +70,5 @@ class SuccessGetRouteInfoState extends MapsState {
 }
 
 class SuccessNavigateState extends MapsState {}
+
+class CancelNavigateState extends MapsState {}

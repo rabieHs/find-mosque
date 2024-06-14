@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchFieldWidget extends StatelessWidget {
+  final TextEditingController controller;
   const SearchFieldWidget({
+    required this.controller,
     super.key,
     required this.locale,
   });
@@ -12,6 +14,11 @@ class SearchFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTap: () {
+        showModalBottomSheet(
+            context: context, builder: (context) => Container());
+      },
+      controller: controller,
       decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.symmetric(vertical: 1, horizontal: 15),

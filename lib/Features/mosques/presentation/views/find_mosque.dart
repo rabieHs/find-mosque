@@ -30,6 +30,7 @@ class FindMosque extends StatelessWidget {
   }
 
   Widget _buildHeader(BuildContext context) {
+    TextEditingController controller = TextEditingController();
     final locale = AppLocalizations.of(context);
 
     return Container(
@@ -40,7 +41,10 @@ class FindMosque extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           PrayerTimeWidget(locale: locale),
-          SearchFieldWidget(locale: locale)
+          SearchFieldWidget(
+            locale: locale,
+            controller: controller,
+          ),
         ],
       ),
     );
