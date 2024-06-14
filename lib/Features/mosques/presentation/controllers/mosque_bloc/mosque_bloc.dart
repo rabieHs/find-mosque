@@ -16,10 +16,12 @@ part 'mosque_state.dart';
 class MosqueBloc extends Bloc<MosqueEvent, MosqueState> {
   final GetMosqueInfoUsecase getMosqueInfoUsecase;
   final AddMosqueInfoUsecase addMosqueInfoUsecase;
+  final ErrorHandler errorHandler;
 
   MosqueBloc(
     this.getMosqueInfoUsecase,
     this.addMosqueInfoUsecase,
+    this.errorHandler,
   ) : super(MosqueInitial()) {
     on<AddMosqueInfoEvent>((event, emit) async {
       emit(LoadingAddMosqueState());
@@ -34,8 +36,7 @@ class MosqueBloc extends Bloc<MosqueEvent, MosqueState> {
       final response = await addMosqueInfoUsecase(mosque);
       response.fold(
         (l) => emit(ErrorAddMosqueState(
-            message:
-                mapFailureToMessage(l, AppLocalizations.of(event.context)!))),
+            message: errorHandler.mapFailureToMessage(l, event.context))),
         (r) => emit(SuccessAddMosqueState()),
       );
     });
@@ -46,7 +47,7 @@ class MosqueBloc extends Bloc<MosqueEvent, MosqueState> {
       response.fold(
         (l) {
           print("bloc runtimeType: ${l.runtimeType}");
-          emit(handeMosqueState(l, AppLocalizations.of(event.context)!));
+          emit(errorHandler.handeMosqueState(l, event.context));
         },
         (r) => emit(SuccessGetMosqueState(mosque: r)),
       );

@@ -2,21 +2,29 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:find_mosques/Features/mosques/domain/entities/location.dart';
 import 'package:find_mosques/Features/mosques/domain/usecases/get_all_mousques_usecase.dart';
-import 'package:find_mosques/core/common/get_mosques_parameters.dart';
+import 'package:find_mosques/Features/mosques/domain/usecases/get_place_location_by_id_usecase.dart';
+import 'package:find_mosques/Features/mosques/domain/usecases/get_place_suggestion_usecase.dart';
+import 'package:find_mosques/core/parameters/get_mosques_parameters.dart';
 import 'package:find_mosques/core/constants/colors/colors.dart';
 import 'package:find_mosques/core/methods/error_handler.dart';
 import 'package:find_mosques/core/methods/maps_methods.dart';
+import 'package:find_mosques/core/parameters/suggestion_parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../domain/entities/suggestion.dart';
+
 part 'maps_event.dart';
 part 'maps_state.dart';
 
 class MapsBloc extends Bloc<MapsEvent, MapsState> {
+  final ErrorHandler errorHandler;
   final GetAllMusquesUsecase getAllMusquesUsecase;
+  final GetPlaceSuggestionUsecase getPlaceSuggestionUsecase;
   final MapsMethos mapsMethos;
+  final GetPlaceLocationByIdUsecase getPlaceLocationByIdUsecase;
 
   String _style = "";
   String get style => _style;
@@ -40,7 +48,12 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
   CameraPosition get currentPosition => _currentPosition;
 
   MapsBloc(
-      this.getAllMusquesUsecase, this._mapCompleterController, this.mapsMethos)
+      this.getAllMusquesUsecase,
+      this._mapCompleterController,
+      this.mapsMethos,
+      this.getPlaceSuggestionUsecase,
+      this.errorHandler,
+      this.getPlaceLocationByIdUsecase)
       : super(MapsInitial()) {
     on<InitializeMapsEvent>((event, emit) async {
       _currentPosition = await mapsMethos.getCurrentUserCameraPosition();
@@ -62,8 +75,8 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
       result.fold(
         (failure) {
           emit(MosquesLocationErrorState(
-              message: mapFailureToMessage(
-                  failure, AppLocalizations.of(event.context)!)));
+              message:
+                  errorHandler.mapFailureToMessage(failure, event.context)));
         },
         (mosques) async {
           _markers = mapsMethos.getMarkers(
@@ -117,6 +130,36 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
     on<CancelNavigationEvent>((event, emit) async {
       _polylineCoordinates = {};
       emit(CancelNavigateState());
+    });
+
+    on<GetPlacesSugegstionEvent>((event, emit) async {
+      final countryCode = await mapsMethos.getMapsCountry(_mapController!);
+      final SuggestionParameters parameters =
+          SuggestionParameters(query: event.query, country: countryCode);
+      final result = await getPlaceSuggestionUsecase(parameters);
+      result.fold(
+        (failure) {
+          emit(errorHandler.handeSuggestionState(failure, event.context));
+        },
+        (suggestions) => emit(LoadedSuggestionsState(suggestions: suggestions)),
+      );
+    });
+
+    on<MoveCameraToSearchedPlaceEvent>((event, emit) async {
+      emit(SuccessMovingCameraToSearchedPlaceState());
+
+      final result = await getPlaceLocationByIdUsecase(event.id);
+      result.fold(
+        (failure) {
+          emit(ErrorMovingCameraToSearchedPlaceState(
+              message:
+                  errorHandler.mapFailureToMessage(failure, event.context)));
+        },
+        (location) {
+          _mapController!.moveCamera(CameraUpdate.newLatLng(
+              LatLng(location.latitude, location.longitude)));
+        },
+      );
     });
   }
 }

@@ -2,13 +2,13 @@
 import 'package:dartz/dartz.dart';
 
 import 'package:find_mosques/Features/mosques/domain/entities/mosque.dart';
-import 'package:find_mosques/core/common/base_usecase.dart';
+import 'package:find_mosques/core/parameters/base_usecase.dart';
 import 'package:find_mosques/core/error/failure.dart';
 
-import '../repository/mosques_repository.dart';
+import '../repository/places_repository.dart';
 
 class AddMosqueInfoUsecase extends BaseUsecase<Unit, Mosque> {
-  final MosquesRepository repository;
+  final PlacesRepository repository;
   AddMosqueInfoUsecase({
     required this.repository,
   });

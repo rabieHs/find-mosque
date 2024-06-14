@@ -49,7 +49,10 @@
     "errorOccurredCheckInternet": "حدث خطأ، يرجى التحقق من اتصالك بالإنترنت",
     "errorOccurred": "حدث خطأ",
     "checkInternetConnection": "يرجى التحقق من اتصالك بالإنترنت",
-    "retry": "أعد المحاولة"
+    "retry": "أعد المحاولة",
+    "noResult": "لا توجد نتائج",
+    "searchTitle": "البحث",
+    "close": "إغلاق"
 
 
 

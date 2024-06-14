@@ -19,6 +19,20 @@ class MapsMethos {
     return CameraPosition(target: userPositionLatLang, zoom: 15);
   }
 
+  Future<String> getMapsCountry(GoogleMapController controller) async {
+    final region = await controller.getVisibleRegion();
+
+    final lat = (region.northeast.latitude + region.southwest.latitude) / 2;
+    final long = (region.northeast.longitude + region.southwest.longitude) / 2;
+    try {
+      List<geocoding.Placemark> placemarks =
+          await geocoding.placemarkFromCoordinates(lat, long);
+      return placemarks[0].isoCountryCode!;
+    } catch (e) {
+      throw Exception("Error in getting country code");
+    }
+  }
+
   Future<LatLng> getCurrentUserPosition() async {
     if (await Geolocator.checkPermission() == LocationPermission.denied) {
       await Geolocator.requestPermission();
@@ -84,28 +98,21 @@ class MapsMethos {
         return 'Unknown location';
       }
     } catch (e) {
-      print(e);
       return 'Unknown location';
     }
   }
 
-  //create a method to show the route between the user and the mosque using flutter_polyline_points
-
   Future<List<LatLng>> showRouteBetweenUserAndMosque(
       LatLng userPosition, LatLng mosquePosition) async {
     try {
-      print("starting gettin poliline points");
       final PolylinePoints polylinePoints = PolylinePoints();
       final result = await polylinePoints.getRouteBetweenCoordinates(
         MAPS_API_KEY,
         PointLatLng(userPosition.latitude, userPosition.longitude),
         PointLatLng(mosquePosition.latitude, mosquePosition.longitude),
       );
-      print("success polyline points");
-
       return result.points.map((e) => LatLng(e.latitude, e.longitude)).toList();
     } catch (e) {
-      print(e);
       throw Exception("Error in getting polyline points");
     }
   }

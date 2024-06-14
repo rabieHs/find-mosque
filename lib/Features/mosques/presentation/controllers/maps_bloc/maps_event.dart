@@ -19,9 +19,9 @@ class InitializeMapsEvent extends MapsEvent {
 }
 
 class GetAllMosquesEventOnCameraMove extends MapsEvent {
-  BuildContext context;
+  final BuildContext context;
   final CameraPosition cameraPosition;
-  GetAllMosquesEventOnCameraMove({
+  const GetAllMosquesEventOnCameraMove({
     required this.context,
     required this.cameraPosition,
   });
@@ -61,3 +61,36 @@ class StartNavigationEvent extends MapsEvent {
 }
 
 class CancelNavigationEvent extends MapsEvent {}
+
+class GetPlacesSugegstionEvent extends MapsEvent {
+  final BuildContext context;
+  final String query;
+
+  const GetPlacesSugegstionEvent({
+    required this.context,
+    required this.query,
+  });
+  @override
+  List<Object> get props => [query, context];
+}
+
+class NavigateToPlaceEvent extends MapsEvent {
+  final String placeId;
+  const NavigateToPlaceEvent({
+    required this.placeId,
+  });
+  @override
+  List<Object> get props => [placeId];
+}
+
+class MoveCameraToSearchedPlaceEvent extends MapsEvent {
+  final BuildContext context;
+  final String id;
+
+  const MoveCameraToSearchedPlaceEvent({
+    required this.id,
+    required this.context,
+  });
+  @override
+  List<Object> get props => [id, context];
+}

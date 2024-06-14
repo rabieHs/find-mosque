@@ -6,15 +6,16 @@ import 'package:find_mosques/Features/mosques/data/models/location_model.dart';
 import 'package:find_mosques/Features/mosques/data/models/mosque_model.dart';
 import 'package:find_mosques/Features/mosques/domain/entities/location.dart';
 import 'package:find_mosques/Features/mosques/domain/entities/mosque.dart';
-import 'package:find_mosques/Features/mosques/domain/repository/mosques_repository.dart';
+import 'package:find_mosques/Features/mosques/domain/entities/suggestion.dart';
+import 'package:find_mosques/Features/mosques/domain/repository/places_repository.dart';
 import 'package:find_mosques/core/error/exception.dart';
 import 'package:find_mosques/core/error/failure.dart';
 import 'package:find_mosques/core/networks/network_info.dart';
 
-class MosquesRepositoryImpl implements MosquesRepository {
+class PlacesRepositoryImpl implements PlacesRepository {
   final MosquesRemoteDatasource remoteDatasource;
   final NetworkInfo networkInfo;
-  MosquesRepositoryImpl({
+  PlacesRepositoryImpl({
     required this.remoteDatasource,
     required this.networkInfo,
   });
@@ -26,7 +27,7 @@ class MosquesRepositoryImpl implements MosquesRepository {
       try {
         final response = await remoteDatasource.getAllMosques(lat, long);
         return Right(response);
-      } on ServerException catch (e) {
+      } on ServerException catch (_) {
         return Left(ServerFailure());
       }
     } else {
@@ -36,7 +37,6 @@ class MosquesRepositoryImpl implements MosquesRepository {
 
   @override
   Future<Either<Failure, Mosque>> getMosqueInfo(Location location) async {
-    // TODO: implement getMosqueInfo
     if (await networkInfo.isConnected) {
       try {
         final response = await remoteDatasource
@@ -44,9 +44,7 @@ class MosquesRepositoryImpl implements MosquesRepository {
         return Right(response);
       } on EmptyException {
         return Left(EmptyFailure());
-      } on ServerException catch (e) {
-        print("repository server exception:");
-        print(e);
+      } on ServerException catch (_) {
         return Left(ServerFailure());
       }
     } else {
@@ -61,8 +59,39 @@ class MosquesRepositoryImpl implements MosquesRepository {
         final mosqueModel = MosqueModel.fromEntity(mosque);
         final response = await remoteDatasource.addMosqueInfo(mosqueModel);
         return Right(response);
-      } on ServerException catch (e) {
-        print(e);
+      } on ServerException catch (_) {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Suggestion>>> getPlacesSuggestion(
+      String query, String country) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response =
+            await remoteDatasource.gePlacestSuggestions(query, country);
+        return Right(response);
+      } on EmptyException {
+        return Left(EmptyFailure());
+      } on ServerException catch (_) {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(OfflineFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Location>> getPlaceLocationById(String id) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final response = await remoteDatasource.getPlaceLocationById(id);
+        return Right(response);
+      } on ServerException catch (_) {
         return Left(ServerFailure());
       }
     } else {

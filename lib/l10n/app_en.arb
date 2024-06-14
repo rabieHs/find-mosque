@@ -50,7 +50,10 @@
     "errorOccurredCheckInternet": "An error occurred, please check your internet connection",
     "errorOccurred": "An error occurred",
     "checkInternetConnection": "Please check your internet connection",
-    "retry": "Retry"
+    "retry": "Retry",
+    "noResult": "No result",
+    "searchTitle": "Search",
+    "close": "Close"
 
 
 

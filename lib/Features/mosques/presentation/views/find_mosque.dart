@@ -1,9 +1,8 @@
+import 'package:find_mosques/Features/mosques/presentation/widgets/search_widget.dart';
 import 'package:find_mosques/core/constants/colors/colors.dart';
 import 'package:find_mosques/core/extensions/screen_sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../widgets/maps_widget.dart';
 import '../widgets/prayer_time_widget.dart';
 import '../widgets/search_field_widget.dart';
@@ -30,7 +29,6 @@ class FindMosque extends StatelessWidget {
   }
 
   Widget _buildHeader(BuildContext context) {
-    TextEditingController controller = TextEditingController();
     final locale = AppLocalizations.of(context);
 
     return Container(
@@ -42,8 +40,12 @@ class FindMosque extends StatelessWidget {
         children: [
           PrayerTimeWidget(locale: locale),
           SearchFieldWidget(
-            locale: locale,
-            controller: controller,
+            onTap: () {
+              showModalBottomSheet(
+                  isScrollControlled: true,
+                  context: context,
+                  builder: (context) => SearchWidget());
+            },
           ),
         ],
       ),
@@ -51,7 +53,7 @@ class FindMosque extends StatelessWidget {
   }
 
   Widget _buildMapContainer(BuildContext context) {
-    return Expanded(
+    return const Expanded(
       child: MapsWidget(),
     );
   }

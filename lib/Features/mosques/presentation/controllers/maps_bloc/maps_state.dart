@@ -72,3 +72,36 @@ class SuccessGetRouteInfoState extends MapsState {
 class SuccessNavigateState extends MapsState {}
 
 class CancelNavigateState extends MapsState {}
+
+class EmptySuggestionsState extends MapsState {}
+
+class LoadingSuggestionsState extends MapsState {}
+
+class ErrorSuggestionsState extends MapsState {
+  final String message;
+  const ErrorSuggestionsState({
+    required this.message,
+  });
+  @override
+  List<Object> get props => [message];
+}
+
+class LoadedSuggestionsState extends MapsState {
+  final List<Suggestion> suggestions;
+  const LoadedSuggestionsState({
+    required this.suggestions,
+  });
+  @override
+  List<Object> get props => [suggestions];
+}
+
+class ErrorMovingCameraToSearchedPlaceState extends MapsState {
+  final String message;
+  const ErrorMovingCameraToSearchedPlaceState({
+    required this.message,
+  });
+  @override
+  List<Object> get props => [message];
+}
+
+class SuccessMovingCameraToSearchedPlaceState extends MapsState {}
