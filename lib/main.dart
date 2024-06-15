@@ -1,3 +1,6 @@
+import 'package:find_mosques/Features/home/presentation/controllers/bloc/home_bloc.dart';
+import 'package:find_mosques/Features/home/presentation/views/pages/home.dart';
+import 'package:find_mosques/Features/home/presentation/views/pages/home_page.dart';
 import 'package:find_mosques/Features/landing/presentation/controllers/bloc/pager_bloc.dart';
 import 'package:find_mosques/Features/landing/presentation/views/landing_screen.dart';
 import 'package:find_mosques/Features/mosques/presentation/controllers/maps_bloc/maps_bloc.dart';
@@ -31,6 +34,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => HomeBloc()),
         BlocProvider(create: (context) => sl<MapsBloc>()),
         BlocProvider(
             create: (context) => sl<LuanchBloc>()..add(StartSplashEvent())),
@@ -52,7 +56,7 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate
         ],
-        home: const FindMosque(),
+        home: Home(),
         routes: Routes.pagesRoutes,
       ),
     );

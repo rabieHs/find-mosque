@@ -20,7 +20,6 @@ class MapsWidget extends StatelessWidget {
     return BlocConsumer<MapsBloc, MapsState>(
       listener: (context, state) {
         if (state is ShowMosqueLocationState) {
-          print("showing dialog");
           BlocProvider.of<MosqueBloc>(context).add(
               GetMosqueInfoEvent(location: state.location, context: context));
           showModalBottomSheet(
@@ -49,6 +48,7 @@ class MapsWidget extends StatelessWidget {
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20))),
               child: GoogleMap(
+                style: bloc.style,
                 onCameraMove: (position) {
                   if (state is! SuccessNavigateState) {
                     bloc.add(GetAllMosquesEventOnCameraMove(

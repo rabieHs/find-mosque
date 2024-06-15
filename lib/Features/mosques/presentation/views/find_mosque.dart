@@ -29,7 +29,7 @@ class FindMosque extends StatelessWidget {
   }
 
   Widget _buildHeader(BuildContext context) {
-    final locale = AppLocalizations.of(context);
+    final locale = AppLocalizations.of(context)!;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),

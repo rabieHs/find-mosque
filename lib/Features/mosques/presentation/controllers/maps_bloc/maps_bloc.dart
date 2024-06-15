@@ -60,7 +60,6 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
       _style = await MapsMethos().getJsonStyle("assets/styles/maps.json");
       _mapController = event.controller;
       _mapCompleterController.complete(_mapController);
-      _mapController!.setMapStyle(_style);
       _mapController!
           .moveCamera(CameraUpdate.newCameraPosition(_currentPosition));
     });
