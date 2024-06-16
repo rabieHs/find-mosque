@@ -1,5 +1,6 @@
 import 'package:find_mosques/Features/mosques/presentation/widgets/search_widget.dart';
 import 'package:find_mosques/core/constants/colors/colors.dart';
+import 'package:find_mosques/core/constants/styles/paddings.dart';
 import 'package:find_mosques/core/extensions/screen_sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -32,7 +33,7 @@ class FindMosque extends StatelessWidget {
     final locale = AppLocalizations.of(context)!;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: defaultPadding,
       height: context.screenHeight() * 0.32,
       child: Column(
         mainAxisSize: MainAxisSize.max,

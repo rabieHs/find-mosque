@@ -2,11 +2,9 @@
 import 'package:find_mosques/core/methods/messages.dart';
 import 'package:find_mosques/core/widgets/circle_progress_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:find_mosques/Features/mosques/presentation/controllers/maps_bloc/maps_bloc.dart';
-import 'package:find_mosques/core/injection/dependecy_injection.dart';
 import '../controllers/mosque_bloc/mosque_bloc.dart';
 import '../views/mosque_info.dart';
 
@@ -48,6 +46,7 @@ class MapsWidget extends StatelessWidget {
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20))),
               child: GoogleMap(
+                zoomControlsEnabled: true,
                 style: bloc.style,
                 onCameraMove: (position) {
                   if (state is! SuccessNavigateState) {

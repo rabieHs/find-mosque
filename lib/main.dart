@@ -1,13 +1,9 @@
 import 'package:find_mosques/Features/home/presentation/controllers/bloc/home_bloc.dart';
 import 'package:find_mosques/Features/home/presentation/views/pages/home.dart';
-import 'package:find_mosques/Features/home/presentation/views/pages/home_page.dart';
 import 'package:find_mosques/Features/landing/presentation/controllers/bloc/pager_bloc.dart';
-import 'package:find_mosques/Features/landing/presentation/views/landing_screen.dart';
 import 'package:find_mosques/Features/mosques/presentation/controllers/maps_bloc/maps_bloc.dart';
 import 'package:find_mosques/Features/mosques/presentation/controllers/mosque_bloc/mosque_bloc.dart';
-import 'package:find_mosques/Features/mosques/presentation/views/find_mosque.dart';
 import 'package:find_mosques/Features/splash/presentation/controllers/bloc/luanch_bloc.dart';
-import 'package:find_mosques/Features/splash/presentation/views/luanch_screen.dart';
 import 'package:find_mosques/core/constants/colors/colors.dart';
 import 'package:find_mosques/core/injection/dependecy_injection.dart';
 import 'package:find_mosques/core/routes/routes.dart';

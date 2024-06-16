@@ -1,14 +1,13 @@
 import 'package:find_mosques/Features/home/presentation/controllers/bloc/home_bloc.dart';
 import 'package:find_mosques/Features/home/domain/entities/drawer_items.dart';
+import 'package:find_mosques/Features/prayer/presentation/views/prayer.dart';
 import 'package:find_mosques/core/constants/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../landing/presentation/views/landing_screen.dart';
 import '../../../../mosques/presentation/views/find_mosque.dart';
 import '../../../domain/entities/drawer_item.dart';
 import '../widgets/drawer_widget.dart';
-import 'home_page.dart';
 
 class Home extends StatelessWidget {
   Home({super.key});
@@ -23,7 +22,7 @@ class Home extends StatelessWidget {
 
   final double scaleFoctor = 1;
 
-  final List<Widget> screens = [HomeScreen(), FindMosque(), LandingScreen()];
+  final List<Widget> screens = [FindMosque(), Prayer()];
 
   @override
   Widget build(BuildContext context) {
