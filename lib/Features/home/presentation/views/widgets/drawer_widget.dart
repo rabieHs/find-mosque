@@ -1,6 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:find_mosques/core/constants/colors/colors.dart';
+import 'package:find_mosques/core/constants/styles/text_styles.dart';
 import 'package:find_mosques/core/extensions/screen_sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../../../domain/entities/drawer_item.dart';
 import '../../../domain/entities/drawer_items.dart';
@@ -25,9 +28,21 @@ class DrawerWidget extends StatelessWidget {
               height: context.screenHeight() * 0.18,
               child: Center(
                 child: ListTile(
-                  leading: const CircleAvatar(),
-                  title: Text(locale.helloWorld),
-                  subtitle: Text(locale.aboutApp),
+                  leading: CircleAvatar(
+                      backgroundColor: primaryColor,
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.white,
+                      )),
+                  title: Text(
+                    locale.helloWorld,
+                    style: defaultTextStyle,
+                  ),
+                  subtitle: Text(
+                    locale.guest,
+                    style:
+                        defaultSubtitleTextStyle.copyWith(color: Colors.white),
+                  ),
                 ),
               )),
           _buildDrawerItems(context, drawerItems),

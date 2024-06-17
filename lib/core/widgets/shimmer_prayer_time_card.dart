@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../core/constants/styles/paddings.dart';
-import '../../../../core/constants/styles/shapes.dart';
+import '../constants/styles/paddings.dart';
+import '../constants/styles/shapes.dart';
 
 class ShimmerPrayerTimeCard extends StatelessWidget {
   const ShimmerPrayerTimeCard({Key? key}) : super(key: key);

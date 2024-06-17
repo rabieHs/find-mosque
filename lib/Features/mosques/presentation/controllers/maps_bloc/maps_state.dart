@@ -10,15 +10,11 @@ sealed class MapsState extends Equatable {
 
 final class MapsInitial extends MapsState {}
 
-class InitializedCameraState extends MapsState {
-  final CameraPosition cameraPosition;
-
-  const InitializedCameraState({
-    required this.cameraPosition,
-  });
+class InitializedMapsState extends MapsState {
+  const InitializedMapsState();
 
   @override
-  List<Object> get props => [cameraPosition];
+  List<Object> get props => [];
 }
 
 class MosquesLoadingState extends MapsState {}

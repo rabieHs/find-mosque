@@ -16,3 +16,12 @@ class GetPrayerTimesEvent extends PrayerEvent {
   @override
   List<Object> get props => [context];
 }
+
+class GetNextPrayerEvent extends PrayerEvent {
+  final BuildContext context;
+  const GetNextPrayerEvent({
+    required this.context,
+  });
+  @override
+  List<Object> get props => [context];
+}

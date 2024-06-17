@@ -62,6 +62,8 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
       _mapCompleterController.complete(_mapController);
       _mapController!
           .moveCamera(CameraUpdate.newCameraPosition(_currentPosition));
+
+      emit(const InitializedMapsState());
     });
 
     on<GetAllMosquesEventOnCameraMove>((event, emit) async {

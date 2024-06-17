@@ -5,6 +5,7 @@ import 'package:find_mosques/Features/mosques/presentation/controllers/maps_bloc
 import 'package:find_mosques/Features/mosques/presentation/controllers/mosque_bloc/mosque_bloc.dart';
 import 'package:find_mosques/Features/prayer/presentation/controllers/bloc/prayer_bloc.dart';
 import 'package:find_mosques/Features/splash/presentation/controllers/bloc/luanch_bloc.dart';
+import 'package:find_mosques/Features/splash/presentation/views/luanch_screen.dart';
 import 'package:find_mosques/core/constants/colors/colors.dart';
 import 'package:find_mosques/core/injection/dependecy_injection.dart';
 import 'package:find_mosques/core/methods/maps_methods.dart';
@@ -56,7 +57,7 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate
         ],
-        home: Home(),
+        home: LuanchScreen(),
         routes: Routes.pagesRoutes,
       ),
     );

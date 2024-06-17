@@ -27,7 +27,7 @@ class LandingScreen extends StatelessWidget {
           );
         }
         if (state is NavigatePageState) {
-          Navigator.pushNamed(context, "/luanch");
+          Navigator.pushNamed(context, "/home");
         }
       },
       builder: (context, state) {

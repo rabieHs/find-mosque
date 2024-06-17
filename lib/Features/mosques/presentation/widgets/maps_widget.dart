@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:find_mosques/Features/prayer/presentation/controllers/bloc/prayer_bloc.dart';
 import 'package:find_mosques/core/methods/messages.dart';
 import 'package:find_mosques/core/widgets/circle_progress_button.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class MapsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<MapsBloc, MapsState>(
       listener: (context, state) {
+        print(state.runtimeType);
         if (state is ShowMosqueLocationState) {
           BlocProvider.of<MosqueBloc>(context).add(
               GetMosqueInfoEvent(location: state.location, context: context));
@@ -54,6 +56,8 @@ class MapsWidget extends StatelessWidget {
                       context: context,
                       cameraPosition: position,
                     ));
+                  } else {
+                    print("maps already loaded");
                   }
                 },
                 myLocationButtonEnabled: true,
@@ -64,7 +68,12 @@ class MapsWidget extends StatelessWidget {
                 initialCameraPosition: bloc.currentPosition,
                 markers: BlocProvider.of<MapsBloc>(context).markers,
                 onMapCreated: (controller) {
-                  bloc.add(InitializeMapsEvent(controller: controller));
+                  if (state is! MosquesLoadedState &&
+                      state is! MosquesLoadingState) {
+                    bloc.add(InitializeMapsEvent(controller: controller));
+                  } else {
+                    print("maps already initialized");
+                  }
                 },
               ),
             ),

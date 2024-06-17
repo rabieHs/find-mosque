@@ -1,11 +1,13 @@
 import 'package:find_mosques/Features/mosques/presentation/widgets/search_widget.dart';
+import 'package:find_mosques/Features/prayer/presentation/controllers/bloc/prayer_bloc.dart';
 import 'package:find_mosques/core/constants/colors/colors.dart';
 import 'package:find_mosques/core/constants/styles/paddings.dart';
 import 'package:find_mosques/core/extensions/screen_sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../widgets/maps_widget.dart';
-import '../widgets/prayer_time_widget.dart';
+import '../../../prayer/presentation/widgets/prayer_time_widget.dart';
 import '../widgets/search_field_widget.dart';
 
 class FindMosque extends StatelessWidget {
@@ -39,7 +41,9 @@ class FindMosque extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          PrayerTimeWidget(locale: locale),
+          PrayerTimeWidget(
+            locale: locale,
+          ),
           SearchFieldWidget(
             onTap: () {
               showModalBottomSheet(

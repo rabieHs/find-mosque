@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 
-getFormattedDate() {
-  return DateFormat('dd-MM-yyyy').format(DateTime.now());
+getFormattedDate({int offsetDays = 0}) {
+  return DateFormat('dd-MM-yyyy')
+      .format(DateTime.now().add(Duration(days: offsetDays)));
 }

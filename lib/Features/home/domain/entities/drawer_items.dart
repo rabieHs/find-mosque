@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -13,10 +14,11 @@ class DrawerItems extends Equatable {
 
   List<DrawerItem> getLocalizedItems() {
     return [
-      DrawerItem(title: locale.home, icon: Icons.home, id: 0),
-      DrawerItem(title: locale.myAccount, icon: Icons.heart_broken, id: 1),
-      DrawerItem(title: locale.appLanguage, icon: Icons.message, id: 2),
-      DrawerItem(title: locale.contactUs, icon: Icons.person, id: 3),
+      DrawerItem(title: locale.home, icon: CupertinoIcons.home, id: 0),
+      DrawerItem(title: locale.prayerTimes, icon: CupertinoIcons.time, id: 1),
+      DrawerItem(title: locale.myAccount, icon: Icons.person_2_outlined, id: 2),
+      DrawerItem(title: locale.appLanguage, icon: Icons.language, id: 2),
+      DrawerItem(title: locale.aboutApp, icon: Icons.info_outline, id: 3),
     ];
   }
 

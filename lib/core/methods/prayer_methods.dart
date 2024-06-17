@@ -1,8 +1,25 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
+import '../../Features/prayer/domain/entities/prayer.dart';
 import '../../Features/prayer/domain/entities/prayer_times.dart';
 
 class PrayerMethods {
+  List<Prayer> generatePrayerList(AppLocalizations locale, PrayerTimes prayer) {
+    return List.generate(5, (index) {
+      return generatePrayer(locale, prayer, index);
+    });
+  }
+
+  Prayer generatePrayer(
+      AppLocalizations locale, PrayerTimes prayer, int index) {
+    return Prayer(
+      name: getPrayerName(index, locale),
+      time: getPrayerTime(index, prayer),
+      image: getPrayerImage(index),
+    );
+  }
+
   String getPrayerImage(int index) {
     switch (index) {
       case 0:
@@ -46,5 +63,25 @@ class PrayerMethods {
       default:
         return prayerTimes.isha;
     }
+  }
+
+  Prayer? getNextPrayer(List<Prayer> prayers) {
+    final now = DateTime.now();
+    final dateFormat = DateFormat("HH:mm");
+
+    for (final prayer in prayers) {
+      try {
+        final prayerTime = dateFormat.parse(prayer.time);
+        final prayerDateTime = DateTime(
+            now.year, now.month, now.day, prayerTime.hour, prayerTime.minute);
+
+        if (prayerDateTime.isAfter(now)) {
+          return prayer;
+        }
+      } catch (e) {
+        print("Error parsing prayer time: $e");
+      }
+    }
+    return null;
   }
 }

@@ -12,11 +12,7 @@ class LuanchScreen extends StatelessWidget {
     return BlocListener<LuanchBloc, LuanchState>(
       listener: (context, state) {
         if (state is LuanchLoaded) {
-          showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                    title: Text("luanch success"),
-                  ));
+          Navigator.pushNamed(context, "/landing");
         }
       },
       child: Container(

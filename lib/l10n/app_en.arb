@@ -53,7 +53,11 @@
     "retry": "Retry",
     "noResult": "No result",
     "searchTitle": "Search",
-    "close": "Close"
+    "close": "Close",
+    "prayerTimes": "Prayer times",
+    "guest": "Guest"
+
+
 
 
 

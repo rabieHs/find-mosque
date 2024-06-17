@@ -15,8 +15,11 @@ final class ErrorPrayerState extends PrayerState {}
 
 final class LoadedPrayerState extends PrayerState {
   final List<Prayer> prayers;
-
-  const LoadedPrayerState({required this.prayers});
+  final Prayer nextPrayer;
+  const LoadedPrayerState({
+    required this.prayers,
+    required this.nextPrayer,
+  });
   @override
   List<Object> get props => [prayers];
 }

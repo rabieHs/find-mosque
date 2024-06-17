@@ -52,7 +52,12 @@
     "retry": "أعد المحاولة",
     "noResult": "لا توجد نتائج",
     "searchTitle": "البحث",
-    "close": "إغلاق"
+    "close": "إغلاق",
+    "prayerTimes": "أوقات الصلاة",
+        "guest": "زائر"
+
+
+
 
 
 

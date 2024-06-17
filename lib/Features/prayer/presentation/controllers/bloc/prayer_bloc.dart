@@ -28,20 +28,28 @@ class PrayerBloc extends Bloc<PrayerEvent, PrayerState> {
     on<GetPrayerTimesEvent>((event, emit) async {
       final locale = AppLocalizations.of(event.context)!;
       String date = getFormattedDate();
+      String tomorrowDate = getFormattedDate(offsetDays: 1);
+
       String address = await mapsMethods.getUserAddress();
       final parameters = PrayerTimesParameters(address: address, date: date);
 
       final response = await getPrayerUsecase(parameters);
-      response.fold((l) => emit(ErrorPrayerState()), (prayer) {
-        List<Prayer> prayers = List.generate(5, (index) {
-          return Prayer(
-            name: prayerMethods.getPrayerName(index, locale),
-            time: prayerMethods.getPrayerTime(index, prayer),
-            image: prayerMethods.getPrayerImage(index),
-          );
-        });
+      response.fold((l) => emit(ErrorPrayerState()), (prayer) async {
+        List<Prayer> prayers = prayerMethods.generatePrayerList(locale, prayer);
+        final nextPrayer = prayerMethods.getNextPrayer(prayers);
+        if (nextPrayer != null) {
+          emit(LoadedPrayerState(prayers: prayers, nextPrayer: nextPrayer));
+        } else {
+          final tomorrowResponse = await getPrayerUsecase(
+              PrayerTimesParameters(address: address, date: tomorrowDate));
 
-        emit(LoadedPrayerState(prayers: prayers));
+          tomorrowResponse.fold((l) => emit(ErrorPrayerState()), (prayer) {
+            final tomorrowPrayer =
+                prayerMethods.generatePrayer(locale, prayer, 0);
+            emit(LoadedPrayerState(
+                prayers: prayers, nextPrayer: tomorrowPrayer));
+          });
+        }
       });
     });
   }
