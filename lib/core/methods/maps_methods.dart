@@ -33,6 +33,19 @@ class MapsMethos {
     }
   }
 
+  Future<String> getUserAddress() async {
+    LatLng userPosition = await getCurrentUserPosition();
+
+    try {
+      List<geocoding.Placemark> placemarks =
+          await geocoding.placemarkFromCoordinates(
+              userPosition.latitude, userPosition.longitude);
+      return "${placemarks[0].subLocality} ${placemarks[0].locality} ${placemarks[0].isoCountryCode}";
+    } catch (e) {
+      throw Exception("Error in getting country code");
+    }
+  }
+
   Future<LatLng> getCurrentUserPosition() async {
     if (await Geolocator.checkPermission() == LocationPermission.denied) {
       await Geolocator.requestPermission();

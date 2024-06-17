@@ -3,9 +3,11 @@ import 'package:find_mosques/Features/home/presentation/views/pages/home.dart';
 import 'package:find_mosques/Features/landing/presentation/controllers/bloc/pager_bloc.dart';
 import 'package:find_mosques/Features/mosques/presentation/controllers/maps_bloc/maps_bloc.dart';
 import 'package:find_mosques/Features/mosques/presentation/controllers/mosque_bloc/mosque_bloc.dart';
+import 'package:find_mosques/Features/prayer/presentation/controllers/bloc/prayer_bloc.dart';
 import 'package:find_mosques/Features/splash/presentation/controllers/bloc/luanch_bloc.dart';
 import 'package:find_mosques/core/constants/colors/colors.dart';
 import 'package:find_mosques/core/injection/dependecy_injection.dart';
+import 'package:find_mosques/core/methods/maps_methods.dart';
 import 'package:find_mosques/core/routes/routes.dart';
 import 'package:find_mosques/firebase_options.dart';
 import 'package:find_mosques/l10n/l10n.dart';
@@ -28,6 +30,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    MapsMethos().getUserAddress();
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => HomeBloc()),
@@ -36,6 +39,7 @@ class MyApp extends StatelessWidget {
             create: (context) => sl<LuanchBloc>()..add(StartSplashEvent())),
         BlocProvider(create: (context) => sl<PagerBloc>()),
         BlocProvider(create: (context) => sl<MosqueBloc>()),
+        BlocProvider(create: (context) => sl<PrayerBloc>()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

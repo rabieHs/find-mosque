@@ -22,7 +22,7 @@ class Home extends StatelessWidget {
 
   final double scaleFoctor = 1;
 
-  final List<Widget> screens = [FindMosque(), Prayer()];
+  final List<Widget> screens = [FindMosque(), PrayerScreen()];
 
   @override
   Widget build(BuildContext context) {
