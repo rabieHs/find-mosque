@@ -56,7 +56,7 @@ class SearchWidget extends StatelessWidget {
       return Container(
         margin: customPadding(10, 0),
         decoration: BoxDecoration(
-            borderRadius: customBorderRadius, color: Colors.white),
+            borderRadius: customBorderRadius(), color: Colors.white),
         child: ListView.builder(
             padding: EdgeInsets.zero,
             shrinkWrap: true,

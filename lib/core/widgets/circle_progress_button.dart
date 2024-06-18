@@ -25,7 +25,7 @@ class CircleProgressButton extends StatelessWidget {
       progress: pageProgress!,
       maxProgress: 100,
       startAngle: 0,
-      animationDuration: const Duration(milliseconds: 300),
+      animationDuration: const Duration(milliseconds: 150),
       animationCurve: Curves.easeInCirc,
       foregroundColor: forgroundColor,
       backgroundColor: const Color(0xffeeeeee),

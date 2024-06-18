@@ -1,5 +1,6 @@
 import 'package:find_mosques/Features/home/presentation/controllers/bloc/home_bloc.dart';
 import 'package:find_mosques/Features/home/domain/entities/drawer_items.dart';
+import 'package:find_mosques/Features/language/presentation/views/language.dart';
 import 'package:find_mosques/Features/prayer/presentation/views/prayer.dart';
 import 'package:find_mosques/core/constants/colors/colors.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class Home extends StatelessWidget {
 
   final double scaleFoctor = 1;
 
-  final List<Widget> screens = [FindMosque(), PrayerScreen()];
+  final List<Widget> screens = [FindMosque(), PrayerScreen(), LanguageScreen()];
 
   @override
   Widget build(BuildContext context) {

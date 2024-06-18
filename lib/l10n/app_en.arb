@@ -55,7 +55,11 @@
     "searchTitle": "Search",
     "close": "Close",
     "prayerTimes": "Prayer times",
-    "guest": "Guest"
+    "guest": "Guest", 
+       "appLanguage": "App language",
+    "selectLanguage": "Select language",
+    "arabic": "Arabic",
+    "english": "English"
 
 
 

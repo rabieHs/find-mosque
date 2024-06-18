@@ -1,3 +1,4 @@
+import 'package:find_mosques/Features/landing/presentation/controllers/bloc/pager_bloc.dart';
 import 'package:find_mosques/Features/splash/presentation/controllers/bloc/luanch_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,10 +10,16 @@ class LuanchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<PagerBloc>(context).add(GetLandingEvent());
+
     return BlocListener<LuanchBloc, LuanchState>(
       listener: (context, state) {
         if (state is LuanchLoaded) {
-          Navigator.pushNamed(context, "/landing");
+          if (BlocProvider.of<PagerBloc>(context).landingKey.isEmpty) {
+            Navigator.pushNamed(context, "/landing");
+          } else {
+            Navigator.pushNamed(context, "/home");
+          }
         }
       },
       child: Container(

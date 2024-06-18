@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../Features/home/presentation/controllers/bloc/home_bloc.dart';
 
 class CustomIconMenuButton extends StatelessWidget {
+  final Color? color;
   const CustomIconMenuButton({
+    this.color = Colors.white,
     super.key,
   });
 
@@ -15,10 +17,10 @@ class CustomIconMenuButton extends StatelessWidget {
           BlocProvider.of<HomeBloc>(context).add(openDrawerEvent(
               languageCode: Localizations.localeOf(context).languageCode));
         },
-        child: const Icon(
+        child: Icon(
           Icons.menu,
           size: 30,
-          color: Colors.white,
+          color: color,
         ));
   }
 }

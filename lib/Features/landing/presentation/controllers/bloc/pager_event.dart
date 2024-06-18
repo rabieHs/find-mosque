@@ -15,3 +15,5 @@ class NavigateToPageEvent extends PagerEvent {
   @override
   List<Object> get props => [page, progress];
 }
+
+class GetLandingEvent extends PagerEvent {}

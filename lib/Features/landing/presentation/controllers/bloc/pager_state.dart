@@ -19,3 +19,10 @@ class ChangePageState extends PagerState {
 }
 
 class NavigatePageState extends PagerState {}
+
+class LoadedLandingState extends PagerState {
+  final String landingKey;
+  const LoadedLandingState({required this.landingKey});
+  @override
+  List<Object> get props => [landingKey];
+}

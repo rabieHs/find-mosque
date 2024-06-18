@@ -54,7 +54,10 @@
     "searchTitle": "البحث",
     "close": "إغلاق",
     "prayerTimes": "أوقات الصلاة",
-        "guest": "زائر"
+        "guest": "زائر",    "appLanguage": "لغة التطبيق",
+    "selectLanguage": "اختر اللغة",
+    "arabic": "العربية",
+    "english": "الإنجليزية"
 
 
 

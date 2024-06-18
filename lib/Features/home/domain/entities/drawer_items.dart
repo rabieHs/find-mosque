@@ -16,7 +16,6 @@ class DrawerItems extends Equatable {
     return [
       DrawerItem(title: locale.home, icon: CupertinoIcons.home, id: 0),
       DrawerItem(title: locale.prayerTimes, icon: CupertinoIcons.time, id: 1),
-      DrawerItem(title: locale.myAccount, icon: Icons.person_2_outlined, id: 2),
       DrawerItem(title: locale.appLanguage, icon: Icons.language, id: 2),
       DrawerItem(title: locale.aboutApp, icon: Icons.info_outline, id: 3),
     ];
