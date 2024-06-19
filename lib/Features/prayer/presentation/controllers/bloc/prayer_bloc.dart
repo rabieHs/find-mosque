@@ -41,17 +41,17 @@ class PrayerBloc extends Bloc<PrayerEvent, PrayerState> {
 
       todayResponse.fold((error) => emit(ErrorPrayerState()), (todayPrayer) {
         tomorrowResponse.fold((error) => emit(ErrorPrayerState()),
-            (tomorrowPrayer) {
+            (tomorrowPrayerTimes) {
           List<Prayer> todayPrayers =
               prayerMethods.generatePrayerList(locale, todayPrayer);
-          List<Prayer> tomorrowPrayers =
-              prayerMethods.generatePrayerList(locale, tomorrowPrayer);
+
           final nextPrayer = prayerMethods.getNextPrayer(todayPrayers);
           if (nextPrayer != null) {
             emit(LoadedPrayerState(
                 prayers: todayPrayers, nextPrayer: nextPrayer));
           } else {
-            final tomorrowPrayer = prayerMethods.getNextPrayer(tomorrowPrayers);
+            final tomorrowPrayer =
+                prayerMethods.generatePrayer(locale, tomorrowPrayerTimes, 0);
             emit(LoadedPrayerState(
                 prayers: todayPrayers, nextPrayer: tomorrowPrayer!));
           }
