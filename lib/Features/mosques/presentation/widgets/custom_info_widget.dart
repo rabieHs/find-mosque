@@ -21,14 +21,14 @@ class CustomInfoWidget extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text(subTitle),
-            SizedBox(
-              width: 5,
-            ),
             Icon(
               icon,
               color: primaryColor,
-            )
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(subTitle),
           ],
         ),
         Text(

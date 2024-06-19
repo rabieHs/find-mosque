@@ -48,6 +48,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           break;
         case 2:
           _page = 2;
+        case 3:
+          _page = 3;
           break;
         default:
           _page = 0;

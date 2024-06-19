@@ -27,30 +27,66 @@ class PrayerBloc extends Bloc<PrayerEvent, PrayerState> {
   ) : super(PrayerInitial()) {
     on<GetPrayerTimesEvent>((event, emit) async {
       final locale = AppLocalizations.of(event.context)!;
-      String date = getFormattedDate();
+      String address = await mapsMethods.getUserAddress();
+      String todayDate = getFormattedDate();
       String tomorrowDate = getFormattedDate(offsetDays: 1);
 
-      String address = await mapsMethods.getUserAddress();
-      final parameters = PrayerTimesParameters(address: address, date: date);
+      final todayParameters =
+          PrayerTimesParameters(address: address, date: todayDate);
+      final tomorrowParameters =
+          PrayerTimesParameters(address: address, date: tomorrowDate);
 
-      final response = await getPrayerUsecase(parameters);
-      response.fold((l) => emit(ErrorPrayerState()), (prayer) async {
-        List<Prayer> prayers = prayerMethods.generatePrayerList(locale, prayer);
-        final nextPrayer = prayerMethods.getNextPrayer(prayers);
-        if (nextPrayer != null) {
-          emit(LoadedPrayerState(prayers: prayers, nextPrayer: nextPrayer));
-        } else {
-          final tomorrowResponse = await getPrayerUsecase(
-              PrayerTimesParameters(address: address, date: tomorrowDate));
+      final todayResponse = await getPrayerUsecase(todayParameters);
+      final tomorrowResponse = await getPrayerUsecase(tomorrowParameters);
 
-          tomorrowResponse.fold((l) => emit(ErrorPrayerState()), (prayer) {
-            final tomorrowPrayer =
-                prayerMethods.generatePrayer(locale, prayer, 0);
+      todayResponse.fold((error) => emit(ErrorPrayerState()), (todayPrayer) {
+        tomorrowResponse.fold((error) => emit(ErrorPrayerState()),
+            (tomorrowPrayer) {
+          List<Prayer> todayPrayers =
+              prayerMethods.generatePrayerList(locale, todayPrayer);
+          List<Prayer> tomorrowPrayers =
+              prayerMethods.generatePrayerList(locale, tomorrowPrayer);
+          final nextPrayer = prayerMethods.getNextPrayer(todayPrayers);
+          if (nextPrayer != null) {
             emit(LoadedPrayerState(
-                prayers: prayers, nextPrayer: tomorrowPrayer));
-          });
-        }
+                prayers: todayPrayers, nextPrayer: nextPrayer));
+          } else {
+            final tomorrowPrayer = prayerMethods.getNextPrayer(tomorrowPrayers);
+            emit(LoadedPrayerState(
+                prayers: todayPrayers, nextPrayer: tomorrowPrayer!));
+          }
+        });
       });
     });
+
+    // on<GetPrayerTimesEvent>((event, emit) async {
+    //   final locale = AppLocalizations.of(event.context)!;
+    //   String date = getFormattedDate();
+    //   String tomorrowDate = getFormattedDate(offsetDays: 1);
+
+    //   String address = await mapsMethods.getUserAddress();
+    //   final parameters = PrayerTimesParameters(address: address, date: date);
+
+    //   final response = await getPrayerUsecase(parameters);
+    //   final tomorrowwResponse = await getPrayerUsecase(parameters);
+
+    //   response.fold((l) => emit(ErrorPrayerState()), (prayer) async {
+    //     List<Prayer> prayers = prayerMethods.generatePrayerList(locale, prayer);
+    //     final nextPrayer = prayerMethods.getNextPrayer(prayers);
+    //     if (nextPrayer != null) {
+    //       emit(LoadedPrayerState(prayers: prayers, nextPrayer: nextPrayer));
+    //     } else {
+    //       final tomorrowResponse = await getPrayerUsecase(
+    //           PrayerTimesParameters(address: address, date: tomorrowDate));
+
+    //       tomorrowResponse.fold((l) => emit(ErrorPrayerState()), (prayer) {
+    //         final tomorrowPrayer =
+    //             prayerMethods.generatePrayer(locale, prayer, 0);
+    //         emit(LoadedPrayerState(
+    //             prayers: prayers, nextPrayer: tomorrowPrayer));
+    //       });
+    //     }
+    //   });
+    // });
   }
 }

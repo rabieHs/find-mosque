@@ -1,3 +1,4 @@
+import 'package:find_mosques/Features/about/presentation/views/about_screen.dart';
 import 'package:find_mosques/Features/home/presentation/controllers/bloc/home_bloc.dart';
 import 'package:find_mosques/Features/home/domain/entities/drawer_items.dart';
 import 'package:find_mosques/Features/language/presentation/views/language.dart';
@@ -23,7 +24,12 @@ class Home extends StatelessWidget {
 
   final double scaleFoctor = 1;
 
-  final List<Widget> screens = [FindMosque(), PrayerScreen(), LanguageScreen()];
+  final List<Widget> screens = [
+    FindMosque(),
+    PrayerScreen(),
+    LanguageScreen(),
+    AboutScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {

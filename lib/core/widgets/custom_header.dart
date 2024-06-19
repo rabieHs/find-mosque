@@ -30,22 +30,23 @@ class CustomHeader extends StatelessWidget {
     final locale = AppLocalizations.of(context)!;
 
     return Container(
-      height: context.screenHeight() * 0.16,
-      padding: customPadding(15, 30),
+      height: context.screenHeight() * 0.13,
+      padding: customPadding(25, 30),
       color: primaryColor,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Expanded(
               child: Align(
                   alignment: locale.localeName == "ar"
-                      ? Alignment.centerRight
-                      : Alignment.centerLeft,
+                      ? Alignment.bottomRight
+                      : Alignment.bottomLeft,
                   child: const CustomIconMenuButton())),
           Expanded(
             child: Text(
               textAlign: TextAlign.center,
               title,
-              style: largeTitleTextStyle,
+              style: largeTitleTextStyle.copyWith(fontSize: 23),
             ),
           ),
           Expanded(child: Container())

@@ -124,9 +124,10 @@ class MapsBloc extends Bloc<MapsEvent, MapsState> {
           points: pints,
         ),
       };
-      emit(SuccessNavigateState());
+
       _mapController!
           .animateCamera(CameraUpdate.newCameraPosition(_currentPosition));
+      emit(SuccessNavigateState());
     });
     on<CancelNavigationEvent>((event, emit) async {
       _polylineCoordinates = {};

@@ -9,7 +9,6 @@ import 'package:find_mosques/core/constants/styles/paddings.dart';
 import 'package:find_mosques/core/constants/styles/shapes.dart';
 import 'package:find_mosques/core/constants/styles/text_styles.dart';
 import 'package:find_mosques/core/extensions/screen_sizes.dart';
-import 'package:find_mosques/core/widgets/custom_button.dart';
 import 'package:find_mosques/core/widgets/custom_header.dart';
 
 class LanguageScreen extends StatelessWidget {

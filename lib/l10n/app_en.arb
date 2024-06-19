@@ -32,11 +32,11 @@
     "loginLogout": "Login / Logout",
     "estimatedTime": "Estimated time",
     "distance": "Distance",
-    "availableForPrayer": "Available for prayer",
+    "availableForPrayer": "Available",
     "fridayPrayer": "Friday prayer",
     "lessonCircles": "Lesson circles",
     "none": "None",
-    "mosqueStatus": "Mosque status",
+    "mosqueStatus": "Status",
     "open": "Open",
     "noInformationAvailable": "No information available",
     "addInformation": "Add information",
@@ -56,10 +56,12 @@
     "close": "Close",
     "prayerTimes": "Prayer times",
     "guest": "Guest", 
-       "appLanguage": "App language",
+       "appLanguage": "Language",
     "selectLanguage": "Select language",
     "arabic": "Arabic",
-    "english": "English"
+    "english": "English",
+        "aboutAppText": "Find Mosques is an application designed to help users find comprehensive information about mosques, including their locations, names, Friday prayer details, and more. It features real-time navigation to mosques and provides prayer times based on the user's location. This app was developed by Rabie Houssaini and is open-source, allowing anyone to use or publish it without making it a source of income."
+
 
 
 
