@@ -5,11 +5,12 @@
     "storage_bucket": "find-mosques-c99bc.appspot.com"
   },
   "client": [
+
     {
       "client_info": {
-        "mobilesdk_app_id": "1:368671850669:android:825ecc6602868ce7ba4624",
+        "mobilesdk_app_id": "1:368671850669:android:6d48e8bce400815fba4624",
         "android_client_info": {
-          "package_name": "com.example.find_mosques"
+          "package_name": "com.rabiehs.mosque"
         }
       },
       "oauth_client": [],

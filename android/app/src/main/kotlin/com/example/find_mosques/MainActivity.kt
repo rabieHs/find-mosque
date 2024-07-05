@@ -1,4 +1,4 @@
-package com.example.find_mosques
+package com.rabiehs.mosque
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,16 +1,18 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rabiehs.mosque"
+>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:label="find_mosques"
+        android:label="Mosque Finder"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:enableOnBackInvokedCallback="true"
         >
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAAlObLuVomFEvcVOWhxQou-lxquD0RJ-4"/>
+            android:value="AIzaSyA7aWChe1t_EMuS9hbSxZVLo0xY2_j-9dk"/>
         <meta-data android:name="com.google.android.gms.version" 
             android:value="@integer/google_play_services_version" />
         <activity

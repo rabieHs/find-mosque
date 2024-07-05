@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAoXr_Mmm6TMwAcNGqLTmp8vA7xk_jy_xM',
-    appId: '1:368671850669:android:825ecc6602868ce7ba4624',
+    appId: '1:368671850669:android:6d48e8bce400815fba4624',
     messagingSenderId: '368671850669',
     projectId: 'find-mosques-c99bc',
     storageBucket: 'find-mosques-c99bc.appspot.com',
@@ -59,10 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyA_QFgM8Hzv5sFMgMJyxppHBCkicwgfxbE',
-    appId: '1:368671850669:ios:996d719589df8c97ba4624',
+    appId: '1:368671850669:ios:cdd361516d1d3593ba4624',
     messagingSenderId: '368671850669',
     projectId: 'find-mosques-c99bc',
     storageBucket: 'find-mosques-c99bc.appspot.com',
-    iosBundleId: 'com.example.findMosques',
+    iosBundleId: 'com.rabiehs.mosque',
   );
+
 }
