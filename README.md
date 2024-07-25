@@ -1,6 +1,4 @@
-# find_mosques
-
-A new Flutter project.
+# find mosque is an open source mosques finder app that allow users to find nearest mosques in his area.
 
 ## Getting Started
 
